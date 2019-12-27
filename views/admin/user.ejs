@@ -1,0 +1,270 @@
+ <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+
+    <div class="page-breadcrumb">
+      <div class="row">
+        <div class="col-lg12 col-md-12 col-sm-12 col-xs-12">
+          <h4 class="page-title">Add User</h4>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <!--<h5 class="card-title">Basic Datatable</h5>-->
+
+
+              <div class="row">
+                <div class="col-lg-3">
+                  <div class="form-group m-t-20">
+                    <label>First Name<sup>*</sup> <small class="text-muted"></small></label>
+                    <input type="text" class="form-control" id="" Placeholder="Enter First Name">
+                    <div class="invalid-feedback">
+                      Please correct the error
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-3">
+                  <div class="form-group m-t-20">
+                    <label>Last Name<sup>*</sup> <small class="text-muted"></small></label>
+                    <input type="text" class="form-control" id="" Placeholder="Enter Last Name">
+                    <div class="invalid-feedback">
+                      Please correct the error
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-3">
+                  <div class="form-group m-t-20">
+                    <label>Email Address<sup>*</sup></label>
+                    <input type="text" class="form-control" name="clientEmail" id="" Placeholder="Enter Email">
+                    <div class="invalid-feedback">
+                      Please correct the error
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-3">
+                  <div class="form-group m-t-20">
+                    <label>Mobile Number<sup>*</sup> <small class="text-muted"></small></label>
+                    <input type="text" class="form-control" id="" Placeholder="Enter Mobile Number">
+                    <div class="invalid-feedback">
+                      Please correct the error
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-lg-3">
+                  <div class="form-group m-t-20">
+                    <label>Whatsapp Number<sup>*</sup> <small class="text-muted"></small></label>
+                    <input type="text" class="form-control" id="" Placeholder="Enter Whatsapp Number">
+                    <div class="invalid-feedback">
+                      Please correct the error
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-3">
+                  <div class="form-group m-t-20">
+                    <label>Designation<sup>*</sup></label>
+                    <select class="select2 form-control custom-select" style="width: 100%; height:36px;">
+                      <option>Select Role</option>
+                      <option>Designation 1</option>
+                      <option>Designation 2</option>
+                      <option>Designation 3</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-lg-3">
+                  <div class="form-group m-t-20">
+                    <label>Department<sup>*</sup></label>
+                    <select class="select2 form-control custom-select" style="width: 100%; height:36px;">
+                      <option>Select Role</option>
+                      <option>Department 1</option>
+                      <option>Department 2</option>
+                      <option>Department 3</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-lg-3">
+                  <div class="form-group m-t-20">
+                    <label>Role<sup>*</sup></label>
+                    <select class="select2 form-control custom-select" style="width: 100%; height:36px;">
+                      <option>Select Role</option>
+                      <option>Role 1</option>
+                      <option>Role 2</option>
+                      <option>Role 3</option>
+                    </select>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row m-b-20">
+
+                <div class="col-lg-3">
+                  <div class="form-group m-t-20">
+                    <label>Place of posting<sup>*</sup></label>
+                    <select class="select2 form-control custom-select" style="width: 100%; height:36px;">
+                      <option>Select Role</option>
+                      <option>Delhi</option>
+                      <option>Noida</option>
+                      <option>Ghaziabad</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div div class="row border-top">
+                <div class="col-lg-12 col-md-12 col-xs-12 m-t-20">
+                  <button type="button" id="ts-success" class="btn btn-primary">Save</button>
+                  <button type="button" class="btn btn-light m-l-5">Cancel</button>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+
+
+
+
+
+<!-- ============================================================== -->
+<!-- Popup (Modal) -->
+<!-- ============================================================== -->
+
+
+
+
+
+
+
+
+<script>
+
+
+  /****************************************
+   *      Toastr (Success/Alert Message)  *
+   ****************************************/
+  $(function(){
+    // Success Type
+    $('#ts-success').on('click', function() {
+      toastr.success('Lorem Ipsum is simply dummy text of the printing and typesetting industry!', 'Dummy Text');
+    });
+    // Success Type
+    $('#ts-success1').on('click', function() {
+      toastr.success('Lorem Ipsum is simply dummy text of the printing and typesetting industry!', 'Dummy Text');
+    });
+  });
+
+  /****************************************
+   *      Phone Country Code  *
+   ****************************************/
+  $(".IntlTelInput").intlTelInput();
+
+
+
+  /****************************************
+   *       Basic Table                   *
+   ****************************************/
+  $('#zero_config, #zero_config1').DataTable();
+  $(".preloader").fadeOut();
+
+  //***********************************//
+  // For select 2
+  //***********************************//
+  $(".select2").select2({
+    tags: true,
+    tokenSeparators: [',', ' ']
+  });
+
+  //***********************************//
+  // Datepicker
+  //***********************************//
+  $('.form_datetime').datetimepicker({
+    //language:  'fr',
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    forceParse: 0,
+    showMeridian: 1,
+    pickerPosition: "bottom-left"
+  });
+
+  $('[data-toggle="tooltip"]').tooltip()
+  //***********************************//
+  // Browse File name
+  //***********************************//
+  function uploadFile(target) {
+    document.getElementById("file-name").innerHTML = target.files[0].name;
+  }
+  //***********************************//
+  // Client Email Add
+  //***********************************//
+
+  $(document).on('click','.addExtraEmail',function(){
+    let addDiv = `	<div class="col-lg-3 deleteClass">
+								<div class="form-group m-t-20">
+									<label>Email Address</label>
+									<input type="text" class="form-control" id="" name="clientEmail" Placeholder="Enter Email">
+								</div>
+								<a href="#" class="removeExtraEmail">
+									<i class="mdi mdi-close" style="color:red; font-size:16px;"></i>
+								</a>
+							</div>`;
+
+    $('.addClientEmail').append(addDiv)
+  });
+
+
+  $(document).on('click','.addExtraPhone',function(){
+    let addDiv = `	<div class="col-lg-3 deleteClass">
+								<div class="form-group m-t-20">
+									<label>Phone Number</label>
+									<input type="text" class="form-control" id="" name="clientPhone" Placeholder="Enter Phone Number">
+								</div>
+								<a href="#" class="removeExtraEmail">
+									<i class="mdi mdi-close" style="color:red; font-size:16px;"></i>
+								</a>
+							</div>`;
+
+    $('.addClientPhone').append(addDiv)
+  });
+  $(document).on('click','.removeExtraEmail',function(){
+    $(this).closest('.deleteClass').remove();
+  })
+
+
+
+</script>
