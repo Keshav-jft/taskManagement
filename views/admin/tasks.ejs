@@ -1,0 +1,228 @@
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+  <% flash.get('message').forEach(function (message) { %>
+
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> <%-message%>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <% }) %>
+  <!-- ============================================================== -->
+  <!-- Bread crumb and right sidebar toggle -->
+  <!-- ============================================================== -->
+  <div class="page-breadcrumb">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <h4 class="page-title">Tasks</h4>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <nav aria-label="breadcrumb" class="breadcrumb-float">
+          <a href="/admin/addTask" class="btn-primary "  data-toggle="tooltip" data-placement="bottom" title="Create Task">
+            <i class="mdi mdi-plus"></i>Create Task
+          </a>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Bread crumb and right sidebar toggle -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+
+            <div class="table-responsive">
+              <table id="taskTable" class="table table-hover" width="100%">
+                <thead>
+                <tr>
+                  <th>TASK/SUB TASK ID</th>
+                  <th>DATE</th>
+                  <th>TASK</th>
+                  <th>PRIORITY</th>
+                  <th>ASSIGNEE</th>
+                  <th>DEADLINE</th>
+                  <th>STATUS</th>
+                  <th>ADDITIONAL COMMENTS</th>
+                  <th class="d-xl-none">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <%taskList.forEach((task)=>{%>
+                <%console.log(task)%>
+                <tr class="hoverable-custom  d-xs-none" onclick="window.location='/admin/viewUser/%>';" style="cursor: pointer">
+                  <td><%=task.id%></td>
+                  <td><%=moment(task.date).format('DD MMM YYYY')%></td>
+                  <td><%=task.priority%></td>
+                  <td><%=task.taskName%></td>
+                  <td><%=task.assignedTo.firstName%></td>
+                  <td><%=moment(task.deadline).format('DD MMM YYYY')%></td>
+                  <td><%=task.status%></td>
+                  <td><%=task.comments%>
+
+                    <div class="hidden-custom">
+                      <a href="/admin/editUser/<%=task.id%>" class="text-secondary fs-18 m-l-12">
+                        <i class="mdi mdi-pencil" data-toggle="tooltip" data-placement="bottom" title="Edit"></i>
+                      </a>
+                      <a href="/admin/viewUser/<%=task.id%>" class="text-secondary fs-18 m-l-12">
+                        <i class="mdi mdi-eye" data-toggle="tooltip" data-placement="bottom" title="View"></i>
+                      </a>
+                      <a href="#" class="text-secondary fs-18 m-l-12"data-toggle="modal">
+                        <i class="mdi mdi-delete" id="<%=task.id%>" data-toggle="tooltip" data-placement="bottom" title="Remove" onclick="deleteUser(this)" ></i>
+                      </a>
+                    </div>
+
+                  </td>
+
+                  <!--only extra small device show--->
+                  <td class="d-xl-none">
+
+                    <a href="/admin/editUser/<%=task.id%>" class="text-secondary fs-18 m-l-12">
+                      <i class="mdi mdi-pencil" data-toggle="tooltip" data-placement="bottom" title="Edit"></i>
+                    </a>
+                    <a href="/admin/viewUser/<%=task.id%>" class="text-secondary fs-18 m-l-12">
+                      <i class="mdi mdi-eye" data-toggle="tooltip" data-placement="bottom" title="View"></i>
+                    </a>
+                    <a href="#" class="text-secondary fs-18 m-l-12"data-toggle="modal">
+                      <i class="mdi mdi-delete" id="<%=task.id%>" data-toggle="tooltip" data-placement="bottom" title="Remove" onclick="deleteUser(this)" ></i>
+                    </a>
+
+                  </td>
+                </tr>
+                <%})%>
+
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+
+
+
+
+
+
+  <!--==========confirm Dialog==============-->
+
+
+  <div class="modal fade" id="ModalDeleteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="text-center">
+                <i class="mdi mdi-alert-circle text-danger fs-60"></i>
+                <h3>Are you sure?</h3>
+                <p>Do you really want to delete these user?</p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="m-b-15 text-center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-btn-no">No, cancel it!</button>
+                <button type="button" class="btn btn-danger" id="modal-btn-yes">Yes, delete it!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--=====================================-->
+
+
+
+
+
+
+
+  <!-- ============================================================== -->
+  <!-- End Container fluid  -->
+  <!-- ============================================================== -->
+
+</div>
+<script>
+  $(document).ready(function () {
+    $('#taskTable').DataTable({
+      order:[]
+
+    })
+
+  })
+  let activeRow=null;
+  function modalConfirm(){
+    console.log(status)
+
+    console.log('--------',"hello")
+    let id=$(activeRow).attr('id')
+    $.post("/admin/deleteUser",
+      {id},
+      function(result){
+        if(result.status) {
+          $(activeRow).closest('tr').remove();
+          toastr.success(result.message, 'Success');
+          $("#ModalDeleteUser").modal('hide');
+        }else {
+          toastr.error(result.message,'failed');
+        }
+      });
+  }
+  function deleteUser(input) {
+    $("#ModalDeleteUser").modal('show');
+    activeRow =input
+  }
+  $(document).on("click", '#modal-btn-no',function(){
+    console.log("data")
+    $("#ModalDeleteUser").modal('hide');
+  });
+  $(document).on("click",'#modal-btn-yes', function(){
+    $("#ModalDeleteUser").modal('hide');
+    return modalConfirm();
+  });
+</script>
+
+
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->

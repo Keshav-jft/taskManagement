@@ -8,11 +8,6 @@ const uuid=require('node-uuid');
 module.exports = {
 
   attributes: {
-     id:{
-       type:'string',
-       defaultsTo:uuid.v4,
-       primaryKey:true
-     },
      title:{
        type:'string'
      },
@@ -24,10 +19,5 @@ module.exports = {
     },
   },
   autoPK: false,
-
-  beforeCreate: function (values, next) {
-    values.password = CipherService.hashPassword(values);
-    next();
-  }
 };
 

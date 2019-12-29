@@ -1,0 +1,265 @@
+
+<div class="page-wrapper">
+  <% flash.get('errorMsg').forEach(function (message) { %>
+
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> <%-message%>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <% }) %>
+  <% flash.get('message').forEach(function (message) { %>
+
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> <%-message%>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <% }) %>
+  <!-- ============================================================== -->
+  <!-- Bread crumb and right sidebar toggle -->
+  <!-- ============================================================== -->
+  <div class="page-breadcrumb">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <h4 class="page-title">Add Task</h4>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <nav aria-label="breadcrumb" class="breadcrumb-float">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/adminDashboard">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Task</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Bread crumb and right sidebar toggle -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <form method="post" action="/admin/addTask" id="addTaskForm" enctype="multipart/form-data">
+          <div class="card">
+            <div class="card-body">
+              <!--<h5 class="card-title">Basic Datatable</h5>-->
+
+
+              <div class="row m-b-10">
+                <div class="col-lg-9">
+                  <div class="row addClientPhone">
+                    <div class="col-lg-4">
+                      <div class="form-group m-t-20">
+                        <label>Date<sup>*</sup> <small class="text-muted"></small></label>
+                        <div class="input-group date form_datetime"  data-link-field="dtp_input1">
+                          <input class="form-control" size="16" name="date" type="text" Placeholder="Enter the date" readonly>
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                          <div class="invalid-feedback">
+                            Please select date
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group m-t-20">
+                        <label>Task<sup>*</sup> <small class="text-muted"></small></label>
+                        <input type="text" class="form-control" id="" name="taskName" Placeholder="Enter task">
+                        <div class="invalid-feedback">
+                          Please enter task
+                        </div>
+                      </div>
+                    </div>
+                    <div  class="col-lg-4">
+                      <div class="form-group m-t-20">
+                        <label>Priority<sup>*</sup> <small class="text-muted"></small></label>
+                        <select class="select2 form-control custom-select" name="priority" style="width: 100%; height:36px;">
+                          <option value="">Select Priority</option>
+                          <%
+                          HelperService.priority.forEach((priority)=>{%>
+                          <option value="<%=priority%>"><%=priority%></option>
+                          <% })
+                          %>
+                        </select>
+                        <div class="invalid-feedback">
+                          Please select priority
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                </div>
+              </div>
+
+
+              <div class="row m-b-10">
+                <div class="col-lg-9">
+                  <div class="row addClientEmail">
+
+                    <div  class="col-lg-4">
+                      <div class="form-group m-t-20">
+                        <label>Assignee<sup>*</sup> <small class="text-muted"></small></label>
+                        <select class="select2 form-control custom-select" name="assignee" style="width: 100%; height:36px;">
+                          <option value="">Select assignee</option>
+                          <%
+                          assignees.forEach((assignee)=>{%>
+                          <option value="<%=assignee.id%>"><%=assignee.firstName%></option>
+                          <% })
+                          %>
+                        </select>
+                        <div class="invalid-feedback">
+                          Please select priority
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group m-t-20">
+                        <label>Deadline<sup>*</sup> <small class="text-muted"></small></label>
+                        <div class="input-group date form_datetime"  data-link-field="dtp_input1">
+                          <input class="form-control" size="16" name="deadline" type="text" Placeholder="Enter the deadline" readonly>
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                          <div class="invalid-feedback">
+                            Please select deadline
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div  class="col-lg-4">
+                      <div class="form-group m-t-20">
+                        <label>Status<sup>*</sup> <small class="text-muted"></small></label>
+                        <select class="select2 form-control custom-select" name="status" style="width: 100%; height:36px;">
+                          <option value="">Select Status</option>
+                          <%
+                          HelperService.status.forEach((status)=>{%>
+                          <option value="<%=status%>"><%=status%></option>
+                          <% })
+                          %>
+                        </select>
+                        <div class="invalid-feedback">
+                          Please select status
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-lg-3">
+
+                </div>
+              </div>
+              <div class="row m-b-10">
+                <div class="col-lg-9">
+                  <div class="row addClientEmail">
+
+                    <div class="col-lg-8">
+                      <div class="form-group m-t-20">
+                        <label>Additional Comment<small class="text-muted"></small></label>
+                        <textarea class="form-control" rows="6" name="comments" placeholder="Write Additional Comment "></textarea>
+
+                        <div class="invalid-feedback">
+                         Enter Additional Comment
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                    </div>
+
+
+                  </div>
+                </div>
+
+                <div class="col-lg-3">
+
+                </div>
+              </div>
+              <div div class="row border-top">
+                <div class="col-lg-12 col-md-12 col-xs-12 m-t-20">
+                  <button type="submit" id="ts-success" class="btn btn-primary">Save</button>
+                  <button type="button" class="btn btn-light m-l-5" onclick="cancelAddUser()">Cancel</button>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Container fluid  -->
+  <!-- ============================================================== -->
+
+</div>
+<script>
+
+  $(document).ready(function () {
+    $("#addTaskForm").validate({
+      errorClass:'is-invalid',
+      rules: {
+        date:{
+          required:true
+        },
+        taskName:{
+          required:true
+        },
+        priority:{
+          required:true
+        },
+        status : {
+          required:true
+        },
+        assignee:{
+          required:true
+        },
+        dealine : {
+          required:true
+        }
+      },
+      //For custom messages
+      messages: {
+
+        date:{
+          required:''
+        },
+        taskName:{
+          required:''
+        },
+        priority:{
+          required:''
+        },
+        status : {
+          required:''
+        },
+        assignee : {
+          required:''
+        },
+        deadline : {
+          required:''
+        }
+
+
+      },
+      invalidHandler: function(form, validator) {
+        console.log(validator.errorMap);
+      },
+
+    });
+
+  })
+
+</script>
+

@@ -9,6 +9,7 @@ module.exports = {
 
   login:async function(req,res){
     passport.authenticate('webLogin', function (err, user, info) {
+      console.log(err, user, info)
       if ((err) || (!user)) {
         req.flash('errMessage', info.message);
         return res.redirect('/')
@@ -19,7 +20,7 @@ module.exports = {
             res.redirect('/');
           } else {
             if(req.user.role.includes('ROLE_SUPER_ADMIN') ) {
-              return res.redirect('/dashboard');
+              return res.redirect('/adminDashboard');
             }
             req.flash('errMessage', "You have not assigned Admin login role");
             res.redirect('/');
@@ -28,13 +29,13 @@ module.exports = {
       }
     })(req, res);
   },
-  dashboard: async function (req, res) {
-    return res.view("admin/dashboard", {layout: 'layouts/adminLayout'});
-  },
 
-  logout:function(req,res){
+
+//logout api
+  logout: async function (req, res) {
     req.session.destroy();
+    req.logout();
     return res.redirect('/');
-  }
+  },
 };
 

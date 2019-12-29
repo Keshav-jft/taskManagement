@@ -36,8 +36,14 @@ module.exports.routes = {
     view: 'login'
   },
   'POST /login':'AuthController.login',
-  'GET /dashboard':'AuthController.dashboard',
+  'GET /logout':'AuthController.logout',
+  'GET /adminDashboard':'DashboardController.adminDashboard',
   'GET /admin/userList':'AdminController.userList',
+  'GET /admin/taskList':'UserController.taskList',
+  'GET /admin/addTask':'UserController.addTask',
+  'POST /admin/addTask':'UserController.addTask',
+  'GET /admin/addUser':'AdminController.addTask',
+  'POST /admin/addUser':'AdminController.addTask'
 
   /***************************************************************************
   *                                                                          *

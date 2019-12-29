@@ -8,13 +8,10 @@ var uuid=require('node-uuid');
 module.exports = {
 
   attributes: {
-    id:{
-      type:'string',
-      defultsTo:uuid.v4,
-      primaryKey:true
-    },
     taskNumber:{
-      type:'integer'
+      type: 'number',
+      autoIncrement: true,
+      unique:true,
     },
     taskName:{
       type:'string'
@@ -25,14 +22,23 @@ module.exports = {
     assignedBy:{
       model:'user'
     },
-    completedDate:{
-      type:'string'
+    priority:{
+      type : 'string',
+      enum:HelperService.priority,
     },
-    toJSON: function () {
-      var obj = this.toObject();
-      return obj;
-    }
+    date:{
+      type:'datetime'
+    },
+    deadline:{
+      type:'datetime'
+    },
+    status:{
+      type : 'string',
+      enum:HelperService.status,
+    },
+    comments:{
+      type:'text'
+    },
   },
-  autopk:false
 };
 

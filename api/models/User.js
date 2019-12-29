@@ -8,11 +8,6 @@ var uuid=require('node-uuid');
 module.exports = {
 
   attributes: {
-    id:{
-      type:'string',
-      primaryKey: true,
-      defaultsTo:uuid.v4
-    },
     userId:{
       type:'number',
       autoIncrement:true
@@ -43,7 +38,7 @@ module.exports = {
     designation:{
       type:'string'
     },
-    departMent:{
+    department:{
       type:'string'
     },
     postingPlace:{
@@ -51,8 +46,6 @@ module.exports = {
     }
 
   },
-  autoPK: false,
-
   beforeCreate: function (values, next) {
     values.password = CipherService.hashPassword(values);
     next();

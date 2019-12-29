@@ -8,7 +8,7 @@
  * For more info on Sails models, see:
  * http://sailsjs.org/#!/documentation/concepts/ORM
  */
-
+const uuid=require('uuid');
 module.exports.models = {
 
   /***************************************************************************
@@ -28,6 +28,10 @@ module.exports.models = {
   *                                                                          *
   ***************************************************************************/
   connection:'someMysqlServer',
-  migrate: 'alter'
-
+  migrate: 'alter',
+  attributes: {
+    createdAt: { type: 'datetime', autoCreatedAt: true, },
+    updatedAt: { type: 'datetime', autoUpdatedAt: true, },
+    id: { type: 'string',primaryKey:true,defaultsTo:uuid.v4},
+  },
 };

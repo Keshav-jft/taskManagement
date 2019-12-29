@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
-
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,29 +8,37 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
-  <title>Dashboard-Admin (JFT-LMS)</title>
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link href="css/dataTables.bootstrap4.css" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <title>Leads(JFT-LMS)</title>
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+  <link href="/css/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="/css/select2.min.css" rel="stylesheet">
   <!-- Custom CSS -->
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/customize.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+
+  <link href="/css/toastr.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-datetimepicker.css">
+  <!-- Phone Country Code CSS -->
+  <link rel="stylesheet" type="text/css" href="/css/intlTelInput.css">
+  <link href="/css/customize.css" rel="stylesheet">
+
 </head>
 
 <body>
 <!-- ============================================================== -->
 <!-- Preloader - style you can find in spinners.css -->
 <!-- ============================================================== -->
-<div class="preloader">
+<!--<div class="preloader">
   <div class="lds-ripple">
     <div class="lds-pos"></div>
     <div class="lds-pos"></div>
   </div>
-</div>
+</div>-->
 <!-- ============================================================== -->
 <!-- Main wrapper -->
 <!-- ============================================================== -->
-<div id="main-wrapper">
+<div id="main-wrapper" data-sidebartype="mini-sidebar" class="mini-sidebar">
   <!-- ============================================================== -->
   <!-- Topbar header - style you can find in pages.scss -->
   <!-- ============================================================== -->
@@ -43,19 +50,19 @@
         <!-- ============================================================== -->
         <!-- Logo -->
         <!-- ============================================================== -->
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="/adminDashboard">
           <!-- Logo icon -->
           <b class="logo-icon p-l-10">
             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
             <!-- Dark Logo icon -->
-            <img src="images/logo-icon.png" alt="homepage" class="light-logo" />
+            <img src="/images/logo-icon.png" alt="homepage" class="light-logo" />
 
           </b>
           <!--End Logo icon -->
           <!-- Logo text -->
           <span class="logo-text">
                              <!-- dark Logo text -->
-                             <img src="images/logo-text.png" alt="homepage" class="light-logo" />
+                             <img src="/images/logo-text.png" alt="homepage" class="light-logo" />
                         </span>
         </a>
         <!-- ============================================================== -->
@@ -87,9 +94,10 @@
           <!-- ============================================================== -->
           <!-- User profile and search -->
           <!-- ============================================================== -->
+          <%console.log(req.user)%>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="d-none d-md-block">Admin Name <i class="mdi mdi-chevron-down" style="vertical-align:middle;"></i></span>
+              <span class="d-none d-md-block"><%=req.user.firstName%> <%=req.user.lastName%>  <i class="mdi mdi-chevron-down" style="vertical-align:middle;"></i></span>
               <span class="d-block d-md-none m-l-10"><i class="fa fa-plus"></i></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right user-dd animated" aria-labelledby="navbarDropdown">
@@ -98,12 +106,18 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+              <a class="dropdown-item" href="/google/connect"><i class="fa fa-google m-r-5 m-l-5"></i> Connect To Google</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/logout"><i class="fa fa-power-off m-r-5 m-l-5" ></i> Logout</a>
             </div>
           </li>
           <!-- ============================================================== -->
           <!-- User profile and search -->
           <!-- ============================================================== -->
+        </ul>
+        <!-- ============================================================== -->
+        <!-- User profile and search -->
+        <!-- ============================================================== -->
         </ul>
       </div>
     </nav>
@@ -120,9 +134,9 @@
       <!-- Sidebar navigation-->
       <nav class="sidebar-nav">
         <ul id="sidebarnav" class="p-t-30">
-          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin_dashboard.html" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
-          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="user_list.html" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" title="Users"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Create User</span></a></li>
-          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="task_list.html" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" title="Tasks"><i class="mdi mdi-file-document-box"></i><span class="hide-menu">Create Task</span></a></li>
+          <li class="sidebar-item"> <a data-toggle="tooltip"  title="Dashboard" class="sidebar-link waves-effect waves-dark sidebar-link" href="/adminDashboard" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+          <li class="sidebar-item"> <a data-toggle="tooltip" title="Users" class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/userList" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Users</span></a></li>
+          <li class="sidebar-item"> <a data-toggle="tooltip" title="Tasks" class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/taskList" aria-expanded="false"><i class="mdi mdi-file-document-box"></i><span class="hide-menu">Tasks</span></a></li>
 
         </ul>
       </nav>
@@ -136,129 +150,8 @@
   <!-- ============================================================== -->
   <!-- Page wrapper  -->
   <!-- ============================================================== -->
-  <div class="page-wrapper">
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <div class="page-breadcrumb">
-      <div class="row">
-        <div class="col-12 d-flex no-block align-items-center">
-          <h4 class="page-title">Dashboard</h4>
-          <div class="ml-auto text-right">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Admin</li>
-              </ol>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Container fluid  -->
-    <!-- ============================================================== -->
-    <div class="container-fluid">
-
-
-      <!-- ============================================================== -->
-      <!-- Status Cards  -->
-      <!-- ============================================================== -->
-
-      <div class="row">
-        <!-- Column -->
-        <!-- <div class="col-md-6 col-lg-6 col-xlg-6">
-            <div class="card card-hover">
-                <div class="box bg-warning text-center">
-                    <h1 class="font-light text-white m-b-0">
-                        <i class="mdi mdi-account-star-variant"></i>
-                    </h1>
-                    <h4 class="text-white font-w-9 lh-1-4"><small class="font-w-6">Total Prospects</small><br>609</h4>
-                </div>
-            </div>
-        </div> -->
-        <!-- Column -->
-        <!-- <div class="col-md-2 col-lg-6 col-xlg-6">
-            <div class="card card-hover">
-                <div class="box bg-danger text-center">
-                    <h1 class="font-light text-white m-b-0">
-                        <i class="mdi mdi-chart-line"></i>
-                    </h1>
-                    <h4 class="text-white font-w-9 lh-1-4"><small class="font-w-6">Total Leads</small><br>254</h4>
-                </div>
-            </div>
-        </div> -->
-        <!-- Column -->
-        <div class="col-sm-3 col-md-3 col-lg-3 col-xlg-2">
-          <div class="card card-hover">
-            <div class="box bg-cyan text-center">
-              <h1 class="font-w-9 text-white m-b-0">20</h1>
-              <h6 class="font-w-6 text-white">Total Task</h6>
-            </div>
-          </div>
-        </div>
-        <!-- Column -->
-        <div class="col-sm-3  col-md-3 col-lg-3 col-xlg-2">
-          <div class="card card-hover">
-            <div class="box bg-danger text-center">
-              <h1 class="font-w-9 text-white m-b-0">06</h1>
-              <h6 class="font-w-6 text-white">Open Task</h6>
-            </div>
-          </div>
-        </div>
-        <!-- Column -->
-        <div class="col-md-3 col-lg-3 col-xlg-3">
-          <div class="card card-hover">
-            <div class="box bg-success text-center">
-              <h1 class="font-w-9 text-white m-b-0">05</h1>
-              <h6 class="font-w-6 text-white">Close Task</h6>
-            </div>
-          </div>
-        </div>
-        <!-- Column -->
-        <!-- Column -->
-        <div class="col-md-3 col-lg-3 col-xlg-3">
-          <div class="card card-hover">
-            <div class="box bg-warning text-center">
-              <h1 class="font-w-9 text-white m-b-0">02</h1>
-              <h6 class="font-w-6 text-white">Inprogress Task</h6>
-            </div>
-          </div>
-        </div>
-        <!-- Column -->
-        <!-- <div class="col-md-2 col-lg-2 col-xlg-2">
-            <div class="card card-hover">
-                <div class="box bg-secondary text-center">
-                    <h1 class="font-w-9 text-white m-b-0">03</h1>
-                    <h6 class="font-w-6 text-white">No Response</h6>
-                </div>
-            </div>
-        </div> -->
-        <!-- Column -->
-        <!-- <div class="col-md-2 col-lg-2 col-xlg-2">
-            <div class="card card-hover">
-                <div class="box bg-success text-center">
-                    <h1 class="font-w-9 text-white m-b-0">04</h1>
-                    <h6 class="font-w-6 text-white">Project Started</h6>
-                </div>
-            </div>
-        </div>                      -->
-        <!-- Column -->
-      </div>
-
-
-
-
-
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Container fluid  -->
-    <!-- ============================================================== -->
-
-  </div>
+  <script src="/js/jquery.min.js"></script>
+  <%- body %>
   <!-- ============================================================== -->
   <!-- End Page wrapper  -->
   <!-- ============================================================== -->
@@ -266,261 +159,175 @@
 <!-- ============================================================== -->
 <!-- End Wrapper -->
 <!-- ============================================================== -->
+
+
+
+<!-- ============================================================== -->
+<!-- Popup (Modal) -->
+<!-- ============================================================== -->
+
+
+
+<!-- ============================================================== -->
+<!-- Popup (Modal) -->
+<!-- ============================================================== -->
+
+<div class="modal fade" id="timelineAttachImg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Images</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators" id="modalImageList">
+
+          </ol>
+          <div class="carousel-inner" id="modalImageDiv">
+
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="ts-success1" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--addFollowup-->
+
+<!--Next Follow Up-->
+
+
+
+
+
+
+
+
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
-<script src="js/jquery.min.js"></script>
-<!-- Bootstrap JavaScript -->
-<script src="js/popper.min.js"></script>
-<!-- Bootstrap tether Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+
+
+<script src="/js/jquery.min.js" ></script>
+
 <!--datatable JavaScript -->
-<script src="js/datatables.min.js"></script>
-<script src="js/perfect-scrollbar.jquery.min.js"></script>
+<script src="/js/datatables.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<!-- Bootstrap JavaScript -->
+<script src="/js/popper.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/perfect-scrollbar.jquery.min.js"></script>
 <!--Wave Effects -->
-<script src="js/waves.js"></script>
+<script src="/js/waves.js"></script>
 <!--Menu sidebar -->
-<script src="js/sidebarmenu.js"></script>
+<script src="/js/sidebarmenu.js"></script>
 <!--Custom JavaScript -->
-<script src="js/custom.js"></script>
+<script src="/js/custom.js"></script>
+<!--Select2 -->
+<script src="/js/select2.full.min.js"></script>
+<script src="/js/select2.min.js"></script>
+
+<!--datepicker -->
+<script src="/js/bootstrap-datetimepicker.js"></script>
+
+<script src="/js/validate.js"></script>
+<script src="/js/additional-methods.min.js"></script>
+<script src="/js/toastr.min.js"></script>
+<script src="/js/readmore.min.js"></script>
+<!--Phone Country Code -->
+<script src="/js/intlTelInput.min.js"></script>
+<script src="/js/moment.js"></script>
+
+
+
+
+
 <script>
-  $(function() {
-    $('.hoverable-custom').mouseenter(function() {
-      console.log("worked")
-      $(this).find('.hidden-custom').css('display', 'block')
-    }).mouseleave(function() {
-      $(this).find('.hidden-custom').css('display', 'none')
-    })
-
-
-    $('#zero_config, #zero_config1').DataTable();
-    $(".preloader").fadeOut();
-    $('[data-toggle="tooltip"]').tooltip()
-
-  })
+  let activeDatePicker=null;
+  /****************************************
+   *       Basic Table                   *
+   ****************************************/
 
 
   $(document).ready(function(){
+
+    $('.carousel').carousel({
+      interval: false
+    });
+    /*$(function () {
+      $('[data-toggle="popover"]').popover()
+    })*/
+
+
+    $(".preloader").fadeOut();
+
+    $('[data-toggle="tooltip"]').tooltip()
+
+    //***********************************//
+    // For select 2
+    //***********************************//
+    $(".select2").select2({
+      tags: true,
+      tokenSeparators: [',', ' '],
+
+
+    });
+
     let width =$(window).width()
-    if(width <= 768 || width >= 1024){
+    if(width >= 768 && width <= 1024 ){
       $('#main-wrapper').addClass('mini-sidebar')
       $('#main-wrapper').attr('data-sidebartype','mini-sidebar')
     }
+    //***********************************//
+    // Datepicker
+    //***********************************//
+    $('.form_datetime').datetimepicker({
+
+      //language:  'fr',
+      // weekStart: 1,
+     // todayBtn:  1,
+      //autoclose: 1,
+     // todayHighlight: 1,
+      //startView: 2,
+      //forceParse: 0,
+      //showMeridian: 1,
+      pickerPosition: "bottom-left",
+      startDate: new Date(),
+      format:"yyyy-mm-dd"
+
+
+
+    }).on('show',function () {
+      activeDatePicker=this;
+    })
   })
 </script>
-
-</body>
-
-</html><!DOCTYPE html>
-<html dir="ltr" lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
-  <title>Dashboard-Admin (JFT-LMS)</title>
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link href="css/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom CSS -->
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/customize.css" rel="stylesheet">
-</head>
-
-<body>
-<!-- ============================================================== -->
-<!-- Preloader - style you can find in spinners.css -->
-<!-- ============================================================== -->
-<div class="preloader">
-  <div class="lds-ripple">
-    <div class="lds-pos"></div>
-    <div class="lds-pos"></div>
-  </div>
-</div>
-<!-- ============================================================== -->
-<!-- Main wrapper -->
-<!-- ============================================================== -->
-<div id="main-wrapper">
-  <!-- ============================================================== -->
-  <!-- Topbar header - style you can find in pages.scss -->
-  <!-- ============================================================== -->
-  <header class="topbar" data-navbarbg="skin5">
-    <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-      <div class="navbar-header" data-logobg="skin5">
-        <!-- This is for the sidebar toggle which is visible on mobile only -->
-        <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-        <!-- ============================================================== -->
-        <!-- Logo -->
-        <!-- ============================================================== -->
-        <a class="navbar-brand" href="index.html">
-          <!-- Logo icon -->
-          <b class="logo-icon p-l-10">
-            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-            <!-- Dark Logo icon -->
-            <img src="images/logo-icon.png" alt="homepage" class="light-logo" />
-
-          </b>
-          <!--End Logo icon -->
-          <!-- Logo text -->
-          <span class="logo-text">
-                             <!-- dark Logo text -->
-                             <img src="images/logo-text.png" alt="homepage" class="light-logo" />
-                        </span>
-        </a>
-        <!-- ============================================================== -->
-        <!-- End Logo -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Toggle which is visible on mobile only -->
-        <!-- ============================================================== -->
-        <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
-      </div>
-      <!-- ============================================================== -->
-      <!-- End Logo -->
-      <!-- ============================================================== -->
-      <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-        <!-- ============================================================== -->
-        <!-- toggle and nav items -->
-        <!-- ============================================================== -->
-        <ul class="navbar-nav float-left mr-auto">
-          <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
-          <!-- ============================================================== -->
-          <!-- create new -->
-          <!-- ============================================================== -->
-
-        </ul>
-        <!-- ============================================================== -->
-        <!-- Right side toggle and nav items -->
-        <!-- ============================================================== -->
-        <ul class="navbar-nav float-right">
-          <!-- ============================================================== -->
-          <!-- User profile and search -->
-          <!-- ============================================================== -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="d-none d-md-block">Admin Name <i class="mdi mdi-chevron-down" style="vertical-align:middle;"></i></span>
-              <span class="d-block d-md-none m-l-10"><i class="fa fa-plus"></i></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right user-dd animated" aria-labelledby="navbarDropdown">
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
-            </div>
-          </li>
-          <!-- ============================================================== -->
-          <!-- User profile and search -->
-          <!-- ============================================================== -->
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- ============================================================== -->
-  <!-- End Topbar header -->
-  <!-- ============================================================== -->
-  <!-- ============================================================== -->
-  <!-- Left Sidebar - style you can find in sidebar.scss  -->
-  <!-- ============================================================== -->
-  <aside class="left-sidebar" data-sidebarbg="skin5">
-    <!-- Sidebar scroll-->
-    <div class="scroll-sidebar">
-      <!-- Sidebar navigation-->
-      <nav class="sidebar-nav">
-        <ul id="sidebarnav" class="p-t-30">
-          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/dashboard" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
-          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/userList" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" title="Users"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Create User</span></a></li>
-          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="task_list.html" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" title="Tasks"><i class="mdi mdi-file-document-box"></i><span class="hide-menu">Create Task</span></a></li>
-
-        </ul>
-      </nav>
-      <!-- End Sidebar navigation -->
-    </div>
-    <!-- End Sidebar scroll-->
-  </aside>
-  <!-- ============================================================== -->
-  <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-  <!-- ============================================================== -->
-  <!-- ============================================================== -->
-  <!-- Page wrapper  -->
-  <!-- ============================================================== -->
-  <div class="page-wrapper">
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Container fluid  -->
-    <!-- ============================================================== -->
-     <%- body %>
-    <!-- ============================================================== -->
-    <!-- End Container fluid  -->
-    <!-- ============================================================== -->
-
-  </div>
-  <!-- ============================================================== -->
-  <!-- End Page wrapper  -->
-  <!-- ============================================================== -->
-</div>
-<!-- ============================================================== -->
-<!-- End Wrapper -->
-<!-- ============================================================== -->
-<!-- ============================================================== -->
-<!-- All Jquery -->
-<!-- ============================================================== -->
-<script src="js/jquery.min.js"></script>
-<!-- Bootstrap JavaScript -->
-<script src="js/popper.min.js"></script>
-<!-- Bootstrap tether Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-<!--datatable JavaScript -->
-<script src="js/datatables.min.js"></script>
-<script src="js/perfect-scrollbar.jquery.min.js"></script>
-<!--Wave Effects -->
-<script src="js/waves.js"></script>
-<!--Menu sidebar -->
-<script src="js/sidebarmenu.js"></script>
-<!--Custom JavaScript -->
-<script src="js/custom.js"></script>
-<!--datatable JavaScript -->
-<script src="js/datatables.min.js"></script>
-<!--Select2 -->
-<script src="js/select2.full.min.js"></script>
-<!--Phone Country Code -->
-<script src="js/intlTelInput.min.js"></script>
-<!--Toast Notification/Snackbar -->
-<script src="js/toastr.min.js"></script>
 <script>
-  $(function() {
-    $('.hoverable-custom').mouseenter(function() {
-      console.log("worked")
-      $(this).find('.hidden-custom').css('display', 'block')
-    }).mouseleave(function() {
-      $(this).find('.hidden-custom').css('display', 'none')
-    })
 
-
-    $('#zero_config, #zero_config1').DataTable();
-    $(".preloader").fadeOut();
-    $('[data-toggle="tooltip"]').tooltip()
-
+  $(document).on('mouseenter','.hoverable-custom',function() {
+    $(this).find('.hidden-custom').css('display', 'block')
+    $('[data-toggle="popover"]').popover()
   })
-
-
-  $(document).ready(function(){
-    let width =$(window).width()
-    if(width <= 768 || width >= 1024){
-      $('#main-wrapper').addClass('mini-sidebar')
-      $('#main-wrapper').attr('data-sidebartype','mini-sidebar')
-    }
+  $(document).on('mouseleave','.hoverable-custom',function() {
+    $(this).find('.hidden-custom').css('display', 'none')
+    $('[data-toggle="popover"]').popover()
   })
 </script>
 
