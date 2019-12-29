@@ -65,15 +65,15 @@
                 <tbody>
                 <%userList.forEach((user)=>{%>
                 <tr class="hoverable-custom  d-xs-none">
-                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.id%></td>
-                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.firstName%> <%=user.lastName%></td>
-                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.email ||'NA'%></td>
-                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.mobileNumber ||'NA'%></td>
-                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.whatsAppNumber ||'NA'%></td>
-                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.designation ||'NA'%></td>
-                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.department ||'NA'%></td>
-                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.role.length?user.role[0].authority:''%></td>
-                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.postingPlace ||'NA'%></td>
+                  <td onclick="window.location='/admin/viewUser?userId=<%=user.id%>';" style="cursor: pointer"><%=user.id%></td>
+                  <td onclick="window.location='/admin/viewUser?userId=<%=user.id%>';" style="cursor: pointer"><%=user.firstName%> <%=user.lastName%></td>
+                  <td onclick="window.location='/admin/viewUser?userId=<%=user.id%>';" style="cursor: pointer"><%=user.email ||'NA'%></td>
+                  <td onclick="window.location='/admin/viewUser?userId=<%=user.id%>';" style="cursor: pointer"><%=user.mobileNumber ||'NA'%></td>
+                  <td onclick="window.location='/admin/viewUser?userId=<%=user.id%>';" style="cursor: pointer"><%=user.whatsAppNumber ||'NA'%></td>
+                  <td onclick="window.location='/admin/viewUser?userId=<%=user.id%>';" style="cursor: pointer"><%=user.designation ||'NA'%></td>
+                  <td onclick="window.location='/admin/viewUser?userId=<%=user.id%>';" style="cursor: pointer"><%=user.department ||'NA'%></td>
+                  <td onclick="window.location='/admin/viewUser?userId=<%=user.id%>';" style="cursor: pointer"><%=user.role.length?user.role[0].authority:''%></td>
+                  <td onclick="window.location='/admin/viewUser?userId=<%=user.id%>';" style="cursor: pointer"><%=user.postingPlace ||'NA'%></td>
                   <td>
                     <%if(!(req.user.id === user.id)){%>
                     <div class="hidden-custom">

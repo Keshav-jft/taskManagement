@@ -57,14 +57,13 @@
                 <div class="col-lg-9">
                   <div class="row addClientPhone">
                     <div class="col-lg-4">
+                      <input name="taskId" type="hidden" value="<%=taskData.id || ''%>">
                       <div class="form-group m-t-20">
-                        <input name="taskId" type="hidden" value="<%=taskData.id%>">
                         <label>Date<sup>*</sup> <small class="text-muted"></small></label>
-                        <div class="input-group date form_datetime"  data-link-field="dtp_input1">
-                          <input class="form-control" size="16" name="date" value="<%=taskData.date || ''%>" type="text" Placeholder="Enter the date" readonly>
-                          <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <div class="flatpickr">
+                          <input class="form-control inputedit" size="16" name="date" value="<%=taskData.date || ''%>" type="text" data-input Placeholder="Enter Date" style="background-color: white" readonly>
                           <div class="invalid-feedback">
-                            Please select date
+                            Please enter date
                           </div>
                         </div>
                       </div>
@@ -124,11 +123,10 @@
                     <div class="col-lg-4">
                       <div class="form-group m-t-20">
                         <label>Deadline<sup>*</sup> <small class="text-muted"></small></label>
-                        <div class="input-group date form_datetime"  data-link-field="dtp_input1">
-                          <input class="form-control" size="16" name="deadline" value="<%=taskData.deadline || ''%>" type="text" Placeholder="Enter the deadline" readonly>
-                          <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <div class="flatpickr">
+                          <input class="form-control inputedit" size="16" name="deadline" value="<%=taskData.deadline || ''%>" type="text" data-input Placeholder="Enter Deadline" style="background-color: white" readonly>
                           <div class="invalid-feedback">
-                            Please select deadline
+                            Please enter deadline
                           </div>
                         </div>
                       </div>
@@ -186,7 +184,7 @@
               <div div class="row border-top">
                 <div class="col-lg-12 col-md-12 col-xs-12 m-t-20">
                   <button type="submit" id="ts-success" class="btn btn-primary">Save</button>
-                  <button type="button" class="btn btn-light m-l-5" onclick="cancelAddUser()">Cancel</button>
+                  <!--<button type="button" class="btn btn-light m-l-5" onclick="cancelAddUser()">Cancel</button>-->
                 </div>
               </div>
 
@@ -226,7 +224,7 @@
         assignee:{
           required:true
         },
-        dealine : {
+        deadline : {
           required:true
         }
       },
@@ -260,6 +258,16 @@
 
     });
 
+    $(".flatpickr").each(function(index,element){
+        console.log("data is ",element)
+
+        console.log("data is index",index)
+        $(element).flatpickr({
+            wrap: true,
+//            minDate:'today',
+          dateFormat:'d-m-Y'
+          });
+    })
   })
 
 </script>

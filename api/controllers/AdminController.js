@@ -14,6 +14,15 @@ module.exports = {
 
     }
   },
+  viewUser:async function(req,res){
+    let userId = req.query.userId;
+    let user =  await User.findOne({id:userId}).populate('role');
+    console.log("user data found...",user);
+    if(user){
+      user.roleData = user.role[0].authority;
+    }
+    return res.view('admin/userView', {layout: HelperService.getLayout(req.user.role), user:user || {}});
+  },
   addUser: async function (req, res) {
     try {
       if (req.method === 'GET') {

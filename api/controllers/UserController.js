@@ -31,12 +31,12 @@ module.exports = {
         let createdTask = null;
         if(!postData.taskId) {
             createdTask = await Task.create({
-            date:new Date(postData.date),
+            date:moment(postData.date,'DD-MM-YYYY').format('YYYY-MM-DD HH:mm:ss'),
             taskName: postData.taskName,
             priority: postData.priority,
             assignedTo: postData.assignee,
             assignedBy:req.user.id,
-            deadline: new Date(postData.deadline),
+            deadline: moment(postData.deadline,'DD-MM-YYYY').format('YYYY-MM-DD HH:mm:ss'),
             status: postData.status,
             comments: postData.comments
           })
