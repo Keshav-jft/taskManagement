@@ -29,7 +29,17 @@ module.exports.policies = {
    '*': true,
   AuthController:{
     home: ['isAdmin'],
+  },
+  UserController:{
+    '*': ['isLogin'],
+  },
+  AdminController:{
+    '*': ['isLogin'],
+  },
+  DashboardController:{
+    '*': ['isLogin'],
   }
+
 
 
 

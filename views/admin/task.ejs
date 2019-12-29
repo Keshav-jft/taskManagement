@@ -57,12 +57,12 @@
               <div class="col-lg-6 col-xs-12 m-t-30">
                 <div class="media">
                 <span class="mediaCircleIcon mr-2">
-                  <i class="mdi mdi-account fs-18"></i>
+                  <i class="mdi mdi-calendar fs-18"></i>
                 </span>
                   <div class="media-body">
                     <h6 class="m-t-2 lh-1-5 font-w-6">
                       <small class="text-muted font-w-6">Date</small><br>
-                      <%=task.date?task.date:'Not added'%></h6>
+                      <%=task.date?moment(task.date).format('DD MMM YYYY'):'Not added'%></h6>
                   </div>
                 </div>
               </div>
@@ -105,12 +105,12 @@
               <div class="col-lg-6  col-xs-12 m-t-30">
                 <div class="media">
 											<span class="mediaCircleIcon mr-2">
-												<i class="mdi mdi-map-marker fs-18"></i>
+												<i class="mdi mdi-calendar-check fs-18"></i>
 											</span>
                   <div class="media-body">
                     <h6 class="m-t-2 lh-1-5 font-w-6">
                       <small class="text-muted font-w-6">Deadline</small><br>
-                      <%=task.deadline?task.deadline:'Not added'%></h6>
+                      <%=task.deadline?moment(task.deadline).format('DD MMM YYYY'):'Not added'%></h6>
                   </div>
                 </div>
               </div>
