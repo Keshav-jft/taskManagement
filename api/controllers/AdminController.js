@@ -37,35 +37,26 @@ module.exports = {
         let postData = req.allParams();
         let userId = postData.userId;
         let createdUser = null;
-        if(!userId){
-          createdUser = await User.create({
-            firstName: postData.firstName,
-            lastName: postData.lastName,
-            email: postData.email,
-            mobileNumber: postData.mobileNumber,
-            whatsAppNumber: postData.whatsAppNumber,
-            designation: postData.designation,
-            department: postData.department,
-            postingPlace: postData.postingPlace,
-            role: postData.role
-          });
-        }else{
 
-          createdUser = await User.update({id:userId},{
-            firstName: postData.firstName,
-            lastName: postData.lastName,
-            email: postData.email,
-            mobileNumber: postData.mobileNumber,
-            whatsAppNumber: postData.whatsAppNumber,
-            designation: postData.designation,
-            department: postData.department,
-            postingPlace: postData.postingPlace,
-            role: postData.role
-          });
+        let data ={
+          firstName: postData.firstName,
+          lastName: postData.lastName,
+          email: postData.email,
+          mobileNumber: postData.mobileNumber,
+          whatsAppNumber: postData.whatsAppNumber,
+          designation: postData.designation,
+          department: postData.department,
+          postingPlace: postData.postingPlace,
+          role: postData.role
+        };
+        if(!userId){
+          createdUser = await User.create(data);
+        }else{
+          createdUser = await User.update({id:userId},data);
          createdUser = createdUser[0]
         }
 
-        console.log('postData..................', postData)
+        console.log('postData..................', postData);
         /*if (!postData.firstName
           || !postData.lastName
           || !postData.email

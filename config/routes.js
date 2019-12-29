@@ -48,6 +48,7 @@ module.exports.routes = {
   'GET /admin/deleteUser':'AdminController.deleteUser',
   'GET /admin/deleteTask':'UserController.deleteTask',
   'GET /admin/viewTask':'UserController.viewTask',
+  'POST /task/addComment':'UserController.addComment',
 
   /***************************************************************************
   *                                                                          *

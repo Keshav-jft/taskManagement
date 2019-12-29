@@ -24,7 +24,7 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <nav aria-label="breadcrumb" class="breadcrumb-float">
           <ol class="breadcrumb">
-            <a href="/admin/addUser" class="btn-primary "  data-toggle="tooltip" data-placement="bottom" title="Add User">
+            <a href="/admin/addUser" class="btn btn-primary "  data-toggle="tooltip" data-placement="bottom" title="Add User">
               <i class="mdi mdi-plus"></i>Add User
             </a>
           </ol>
@@ -80,7 +80,7 @@
                       <a href="/admin/addUser?userId=<%=user.id%>" class="text-secondary fs-18 m-l-12">
                         <i class="mdi mdi-pencil" data-toggle="tooltip" data-placement="bottom" title="Edit"></i>
                       </a>
-                      <a href="/admin/viewUser/<%=user.id%>" class="text-secondary fs-18 m-l-12">
+                      <a href="/admin/viewUser?userId=<%=user.id%>" class="text-secondary fs-18 m-l-12">
                         <i class="mdi mdi-eye" data-toggle="tooltip" data-placement="bottom" title="View"></i>
                       </a>
                       <span style="cursor: pointer" class="text-secondary fs-18 m-l-12 deleteUser" userId="<%=user.id%>">

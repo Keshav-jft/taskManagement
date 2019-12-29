@@ -1,8 +1,11 @@
-
-<!-- ============================================================== -->
-<!-- Page wrapper  -->
-<!-- ============================================================== -->
+<style>
+  #commentList{
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+</style>
 <div class="page-wrapper">
+
   <% flash.get('message').forEach(function (message) { %>
 
   <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -23,9 +26,7 @@
   </div>
 
   <% }) %>
-  <!-- ============================================================== -->
-  <!-- Bread crumb and right sidebar toggle -->
-  <!-- ============================================================== -->
+
   <div class="page-breadcrumb">
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -38,16 +39,11 @@
       </div>
     </div>
   </div>
-  <!-- ============================================================== -->
-  <!-- End Bread crumb and right sidebar toggle -->
-  <!-- ============================================================== -->
-  <!-- ============================================================== -->
-  <!-- Container fluid  -->
-  <!-- ============================================================== -->
+
   <div class="container-fluid">
     <div class="row">
 
-      <div class="col-md-12" id="prospectView">
+      <div class="col-md-9" id="prospectView">
         <div class="card h-100">
           <div class="m-t-15 m-r-15">
             <nav aria-label="Page navigation example">
@@ -57,7 +53,8 @@
           <div class="card-body">
             <!--<h5 class="card-title">Basic Datatable</h5>-->
             <div class="row">
-              <div class="col-lg-4 col-xs-12 m-t-30">
+              <input type="hidden" id="taskId" value="<%=task.id || ''%>">
+              <div class="col-lg-6 col-xs-12 m-t-30">
                 <div class="media">
                 <span class="mediaCircleIcon mr-2">
                   <i class="mdi mdi-account fs-18"></i>
@@ -69,7 +66,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-xs-12 m-t-30">
+              <div class="col-lg-6 col-xs-12 m-t-30">
                 <div class="media">
               <span class="mediaCircleIcon mr-2">
               <i class="mdi mdi-domain fs-18"></i>
@@ -81,7 +78,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-xs-12 m-t-30">
+              <div class="col-lg-6 col-xs-12 m-t-30">
                 <div class="media">
               <span class="mediaCircleIcon mr-2">
               <i class="mdi mdi-briefcase fs-18"></i>
@@ -93,12 +90,7 @@
                   </div>
                 </div>
               </div>
-
-
-
-
-
-              <div class="col-lg-4 col-xs-12 m-t-30">
+              <div class="col-lg-6 col-xs-12 m-t-30">
                 <div class="media">
                 <span class="mediaCircleIcon mr-2">
                 <i class="mdi mdi-email fs-18"></i>
@@ -110,8 +102,7 @@
                   </div>
                 </div>
               </div>
-
-              <div class="col-lg-4 col-xs-12 m-t-30">
+              <div class="col-lg-6  col-xs-12 m-t-30">
                 <div class="media">
 											<span class="mediaCircleIcon mr-2">
 												<i class="mdi mdi-map-marker fs-18"></i>
@@ -123,7 +114,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-xs-12 m-t-30">
+              <div class="col-lg-6 col-xs-12 m-t-30">
                 <div class="media">
 											<span class="mediaCircleIcon mr-2">
 												<i class="mdi mdi-city fs-18"></i>
@@ -136,7 +127,7 @@
                 </div>
               </div>
 
-              <div class="col-lg-4 col-xs-12 m-t-30">
+              <div class="col-lg-12 col-xs-12 m-t-30">
                 <div class="media">
 											<span class="mediaCircleIcon mr-2">
 												<i class="mdi mdi-earth fs-18"></i>
@@ -148,49 +139,92 @@
                   </div>
                 </div>
               </div>
-
-
-
             </div>
-
             <div div class="row border-top m-t-20">
               <div class="col-lg-12 col-md-12 col-xs-12 m-t-20">
-                <button type="button" id="editProspectButton" class="btn btn-primary" onclick="openEditProspect()">Edit</button>
+                <a href="/admin/addTask?taskId=<%=task.id%>" class="btn btn-primary" >Edit</a>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="col-md-3" id="prospectCommentView">
+        <div class="card h-100">
+          <div class="card-body">
+            <!--<h5 class="card-title">Basic Datatable</h5>-->
+            <div class="row">
+              <div class="col-md-12">
+                <div class=" m-b-0 border-bottom" style="height: 50px;">
+                  <h4 class="page-title">Comments</h4>
+                </div>
+              </div>
+              <div class="col-md-12 m-t-20" id="commentList">
+                <% commentData.forEach(temp=>{%>
+                <div class="m-b-20 m-t-20 border-bottom" style="height: 50px;">
+                  <h6 class="page-title"><%=temp.userName%></h6>
+                  <p><%=temp.description%></p>
+                </div>
+                <%})%>
+              </div>
 
+            <div class="col-md-12 m-t-20 m-b-20">
 
+              <button id="addNewComment" class="btn btn-primary" style="float: right"><i class="mdi mdi-plus"></i> Add New Comment</button>
 
-    </div>
+            </div>
+            <div class="col-md-12" id="commentBox" style="display: none">
+              <textarea class="form-control" style="border-radius: 10px" rows="6" name="comment" id="comment" ></textarea>
+              <div class="invalid-feedback" id="commentError">
+                Please enter comment
+              </div>
+                <button id="submitComment" class="btn btn-primary m-t-15" style="float: right">submit</button>
+                <button id="cancelComment" class="btn btn-light m-t-15 m-r-10" style="float: right">cancel</button>
+            </div>
+            </div>
+          </div>
+          </div>
+        </div>
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
 
   </div>
+
 </div>
-<!-- ============================================================== -->
-<!-- End Page wrapper  -->
-<!-- ============================================================== -->
 
-<!-- ============================================================== -->
-<!-- End Wrapper -->
-<!-- ============================================================== -->
+</div>
+<script>
 
-
-
-
-
-<!-- ============================================================== -->
-<!-- Popup (Modal) -->
-<!-- ============================================================== -->
-<!--collaspe-->
-
-
-
-
+  $('#submitComment').click(function(){
+      let comment = $('#comment').val().trim()
+    $('#commentError').hide();
+    if(!comment){
+        $('#commentError').show();
+        return false;
+      }
+      let taskId =  $('#taskId').val();
+      loadFromControllerAndToComponent('/task/addComment',{comment:comment,taskId:taskId},(successFullCall)=>{
+          if(successFullCall.status){
+             let str=`<div class="m-b-20 m-t-20 border-bottom" style="height: 50px;">
+                  <h6 class="page-title">${successFullCall.commentData.userName }</h6>
+                  <p>${successFullCall.commentData.description}</p>
+                </div>`
+             $('#commentList').prepend(str)
+            $('#comment').val('');
+          }else {
+              alert('Something went wrong');
+          }
+      },(errorCallBack)=>{
+        alert('Something went wrong'+errorCallBack.message);
+      },'POSt')
+  });
+  $('#addNewComment').click(function () {
+    $('#commentBox').slideDown();
+  });
+  $('#cancelComment').click(function () {
+    $('#commentBox').slideUp();
+  });
+</script>
 
 
 

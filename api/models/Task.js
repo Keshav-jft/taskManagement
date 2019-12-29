@@ -39,6 +39,10 @@ module.exports = {
     comments:{
       type:'text'
     },
+    comment:{
+      collection:'comment',
+      via:'task'
+    },
     isDeleted:{
       type:'boolean',
       defaultsTo:false
