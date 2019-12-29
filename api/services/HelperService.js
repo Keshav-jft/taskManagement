@@ -1,6 +1,6 @@
 module.exports = {
   priority : ['Low','Medium','High'],
-  status : ["Open","InProgress","Closed"],
+  status : ["Open","In Progress","Closed"],
   designationList:['CEO','CTO'],
   departmentList:['IT','SALES'],
   placeList:['Noida','Delhi'],

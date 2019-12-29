@@ -20,7 +20,18 @@ module.exports.bootstrap =async function(cb) {
     await Role.findOrCreate({authority:'ROLE_ADMIN'});
     await Role.findOrCreate({authority:'ROLE_SUPER_ADMIN'});
     let role=await Role.findOne({authority:'ROLE_SUPER_ADMIN'});
-    await User.findOrCreate({email: 'admin@mail.com'},{email: 'admin@mail.com',firstName:'Super',lastName:'Admin',password: '12345', role:role.id});
+    await User.findOrCreate({email: 'admin@mail.com'}, {
+      email: 'admin@mail.com',
+      firstName: 'Super',
+      lastName: 'Admin',
+      password: '12345',
+      role: role.id,
+      mobileNumber:'9123456789',
+      whatsAppNumber:'9123456789',
+      designation:'CEO',
+      department:'IT',
+      postingPlace:"Delhi",
+    });
     process.env.TZ = 'UTC'
     sails.hooks.http.app.disable('etag')
   }catch(err)

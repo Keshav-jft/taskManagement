@@ -9,9 +9,9 @@ module.exports = {
   adminDashboard: async function (req, res) {
     let totalTask = await Task.count();
     let openTask = await Task.count({status:'Open'});
-    let inProgressTask = await Task.count({status:'InProgress'});
+    let inProgressTask = await Task.count({status:'In Progress'});
     let closedTask = await Task.count({status:'Closed'});
-    let taskStatus=JSON.stringify([["TOTAL",totalTask],["OPEN",openTask],["INPROGRESS",inProgressTask],["CLOSE",closedTask]])
+    let taskStatus=JSON.stringify([["TOTAL",totalTask],["OPEN",openTask],["IN PROGRESS",inProgressTask],["CLOSE",closedTask]])
     let foundUser = await Role.findOne({authority:'ROLE_USER'}).populate('user')
     let foundCoordinator = await Role.findOne({authority:'ROLE_COORDINATOR'}).populate('user')
     let foundAdmin = await Role.findOne({authority:'ROLE_ADMIN'}).populate('user')

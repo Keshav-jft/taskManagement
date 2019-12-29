@@ -108,7 +108,9 @@ module.exports = {
       if(comments.length){
         for(let temp of comments){
          let user = await User.findOne({id:temp.user});
-         commentData.push({description:temp.description,userName: (user.firstName ||'')+" "+(user.lastName || ''),commentId:temp.id});
+         if(user){
+           commentData.push({createdAt:temp.createdAt,description:temp.description,userName: (user.firstName ||'')+" "+(user.lastName || ''),commentId:temp.id});
+         }
         }
       }
 
@@ -137,6 +139,7 @@ module.exports = {
         return res.send({message: 'Something went wrong, Comment cannot added', status: false});
       }
       commentData.userName = (req.user.firstName ||"")+" "+(req.user.lastName ||"");
+      commentData.createdAt = commentData.createdAt ? moment(commentData.createdAt).format('DD MMM YYYY'):'';
       return res.send({message: 'Comment has been successfully added', status: true, commentData: commentData});
 
     }catch(e){

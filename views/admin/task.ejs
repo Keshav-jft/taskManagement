@@ -160,6 +160,7 @@
               <div class="col-md-12 m-t-20" id="commentList">
                 <% commentData.forEach(temp=>{%>
                 <div class="m-b-20 m-t-20 border-bottom" style="height: 50px;">
+                  <span style="float: right;"><%=temp.createdAt?moment(temp.createdAt).format('DD MMM YYYY'):''%></span>
                   <h6 class="page-title"><%=temp.userName || ''%></h6>
                   <p><%=temp.description || ''%></p>
                 </div>
@@ -186,7 +187,6 @@
 
 </div>
 <script>
-
   $('#submitComment').click(function(){
       let comment = $('#comment').val().trim()
     $('#commentError').hide();
@@ -198,6 +198,7 @@
       loadFromControllerAndToComponent('/task/addComment',{comment:comment,taskId:taskId},(successFullCall)=>{
           if(successFullCall.status){
              let str=`<div class="m-b-20 m-t-20 border-bottom" style="height: 50px;">
+                  <span style="float: right;">${successFullCall.commentData.createdAt}</span>
                   <h6 class="page-title">${successFullCall.commentData.userName }</h6>
                   <p>${successFullCall.commentData.description}</p>
                 </div>`
