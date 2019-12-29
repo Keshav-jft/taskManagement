@@ -29,28 +29,24 @@ module.exports = {
           return;
         }
         let createdTask = null;
+        let date = moment(postData.date,'DD-MM-YYYY').format('YYYY-MM-DD HH:mm:ss')
+        let deadLine= moment(postData.deadline,'DD-MM-YYYY').format('YYYY-MM-DD HH:mm:ss')
+
+         let data ={
+           date:date,
+           taskName: postData.taskName,
+           priority: postData.priority,
+           assignedTo: postData.assignee,
+           assignedBy:req.user.id,
+           deadline: deadLine,
+           status: postData.status,
+           comments: postData.comments
+         };
+
         if(!postData.taskId) {
-            createdTask = await Task.create({
-            date:moment(postData.date,'DD-MM-YYYY').format('YYYY-MM-DD HH:mm:ss'),
-            taskName: postData.taskName,
-            priority: postData.priority,
-            assignedTo: postData.assignee,
-            assignedBy:req.user.id,
-            deadline: moment(postData.deadline,'DD-MM-YYYY').format('YYYY-MM-DD HH:mm:ss'),
-            status: postData.status,
-            comments: postData.comments
-          })
+            createdTask = await Task.create(data);
         } else {
-          createdTask = await Task.update({id:postData.taskId},{
-            date:new Date(postData.date),
-            taskName: postData.taskName,
-            priority: postData.priority,
-            assignedTo: postData.assignee,
-            assignedBy:req.user.id,
-            deadline: new Date(postData.deadline),
-            status: postData.status,
-            comments: postData.comments
-          })
+          createdTask = await Task.update({id:postData.taskId},data);
           createdTask = createdTask[0]
         }
         if(!createdTask) {
@@ -103,15 +99,46 @@ module.exports = {
   viewTask:async function(req,res) {
     try  {
       let postData = req.allParams();
-      let task = await Task.findOne({id:postData.taskId}).populate(['assignedTo']);
+      let commentData = [];
+      let task = await Task.findOne({id:postData.taskId}).populate(['assignedTo','comment']);
+      let comments = task.comment.length ? task.comment :[];
+
+      if(comments.length){
+        for(let temp of comments){
+         let user = await User.findOne({id:temp.user});
+         commentData.push({description:temp.description,userName: (user.firstName ||'')+" "+(user.lastName || ''),commentId:temp.id});
+        }
+      }
+
       if(!task) {
         return res.view('404')
       }
-      return res.view('admin/task',{layout:HelperService.getLayout(req.user.role),task})
+      return res.view('admin/task',{layout:HelperService.getLayout(req.user.role),task,commentData:commentData})
 
     } catch (err) {
-      console.log('Error   :',err)
+      console.log('Error   :',err);
       return res.view('500')
+    }
+  },
+  addComment:async function(req,res){
+    try {
+      let {taskId, comment} = req.body;
+
+      if (!taskId) {
+        return res.send({message: 'Missing Task Id', status: false});
+      }
+      if (!comment) {
+        return res.send({message: 'Comment filed cannot be empty', status: false});
+      }
+      let commentData = await Comment.create({task: taskId, description: comment, user: req.user.id});
+      if (!commentData) {
+        return res.send({message: 'Something went wrong, Comment cannot added', status: false});
+      }
+      commentData.userName = (req.user.firstName ||"")+" "+(req.user.lastName ||"");
+      return res.send({message: 'Comment has been successfully added', status: true, commentData: commentData});
+
+    }catch(e){
+      return res.send({message: 'error... '+e.message, status: false});
     }
   }
 };

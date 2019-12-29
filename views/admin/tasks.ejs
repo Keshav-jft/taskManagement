@@ -1,4 +1,8 @@
-
+<style>
+  .hidden-custom{
+    margin-top: -35px !important;
+  }
+</style>
 <!-- ============================================================== -->
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
@@ -23,7 +27,7 @@
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <nav aria-label="breadcrumb" class="breadcrumb-float">
-          <a href="/admin/addTask" class="btn-primary "  data-toggle="tooltip" data-placement="bottom" title="Create Task">
+          <a href="/admin/addTask" class="btn btn-primary "  data-toggle="tooltip" data-placement="bottom" title="Create Task">
             <i class="mdi mdi-plus"></i>Create Task
           </a>
         </nav>
@@ -58,17 +62,16 @@
                 </tr>
                 </thead>
                 <tbody>
-
                 <%taskList.forEach((task)=>{%>
                 <%console.log(task)%>
                 <tr class="hoverable-custom  d-xs-none"  style="cursor: pointer">
-                  <td><%=task.id%></td>
-                  <td><%=moment(task.date).format('DD MMM YYYY')%></td>
-                  <td><%=task.priority%></td>
-                  <td><%=task.taskName%></td>
-                  <td><%=task.assignedTo.firstName%></td>
-                  <td><%=moment(task.deadline).format('DD MMM YYYY')%></td>
-                  <td><%=task.status%></td>
+                  <td onclick="window.location='/admin/viewTask?taskId=<%=task.id%>';"><%=task.id%></td>
+                  <td onclick="window.location='/admin/viewTask?taskId=<%=task.id%>';"><%=moment(task.date).format('DD MMM YYYY')%></td>
+                  <td onclick="window.location='/admin/viewTask?taskId=<%=task.id%>';"><%=task.priority%></td>
+                  <td onclick="window.location='/admin/viewTask?taskId=<%=task.id%>';"><%=task.taskName%></td>
+                  <td onclick="window.location='/admin/viewTask?taskId=<%=task.id%>';"><%=task.assignedTo.firstName%></td>
+                  <td onclick="window.location='/admin/viewTask?taskId=<%=task.id%>';"><%=moment(task.deadline).format('DD MMM YYYY')%></td>
+                  <td onclick="window.location='/admin/viewTask?taskId=<%=task.id%>';"><%=task.status%></td>
                   <td><%=task.comments%>
 
                     <div class="hidden-custom">
