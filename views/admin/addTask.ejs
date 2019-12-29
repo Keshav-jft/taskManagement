@@ -26,7 +26,13 @@
   <div class="page-breadcrumb">
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <% if(taskData && taskData.taskName){%>
+        <h4 class="page-title"> <%=taskData.taskName%>
+          <small style="color:#575d5d">(Edit Task)</small>
+        </h4>
+        <%}else{%>
         <h4 class="page-title">Add Task</h4>
+        <%}%>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <nav aria-label="breadcrumb" class="breadcrumb-float">
@@ -50,11 +56,9 @@
         <form method="post" action="/admin/addTask" id="addTaskForm" enctype="multipart/form-data">
           <div class="card">
             <div class="card-body">
-              <!--<h5 class="card-title">Basic Datatable</h5>-->
-
 
               <div class="row m-b-10">
-                <div class="col-lg-9">
+                <div class="col-lg-12">
                   <div class="row addClientPhone">
                     <div class="col-lg-4">
                       <input name="taskId" type="hidden" value="<%=taskData.id || ''%>">
@@ -95,13 +99,11 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-3">
-                </div>
               </div>
 
 
               <div class="row m-b-10">
-                <div class="col-lg-9">
+                <div class="col-lg-12">
                   <div class="row addClientEmail">
 
                     <div  class="col-lg-4">
@@ -150,16 +152,12 @@
 
                   </div>
                 </div>
-
-                <div class="col-lg-3">
-
-                </div>
               </div>
               <div class="row m-b-10">
-                <div class="col-lg-9">
+                <div class="col-lg-12">
                   <div class="row addClientEmail">
 
-                    <div class="col-lg-8">
+                    <div class="col-lg-4">
                       <div class="form-group m-t-20">
                         <label>Additional Comment<small class="text-muted"></small></label>
                         <textarea class="form-control" rows="6" name="comments"  placeholder="Write Additional Comment "><%=taskData.comments || ''%></textarea>
@@ -175,10 +173,6 @@
 
 
                   </div>
-                </div>
-
-                <div class="col-lg-3">
-
                 </div>
               </div>
               <div div class="row border-top">

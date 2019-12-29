@@ -34,6 +34,7 @@ module.exports = {
         let roles = await Role.find();
         return res.view('admin/addUser', {layout: HelperService.getLayout(req.user.role), roles,userData:user || {}});
       } else {
+        let message = "User created"
         let postData = req.allParams();
         let userId = postData.userId;
         let createdUser = null;
@@ -53,7 +54,8 @@ module.exports = {
           createdUser = await User.create(data);
         }else{
           createdUser = await User.update({id:userId},data);
-         createdUser = createdUser[0]
+         createdUser = createdUser[0];
+          message = "User updated";
         }
 
         console.log('postData..................', postData);
@@ -75,12 +77,12 @@ module.exports = {
 
 
         if (!createdUser) {
-          let message = HelperService.toastrMessageError('User not created!')
+          message = HelperService.toastrMessageError('User not created!')
           req.flash('errorMsg', message);
           res.redirect('back');
           return;
         }
-        let message = HelperService.toastrMessageSuccess('User created!')
+         message = HelperService.toastrMessageSuccess(message)
         req.flash('message', message);
         return res.redirect('/admin/userList');
         /* let message =HelperService.toastrMessageSuccess('Task created!')

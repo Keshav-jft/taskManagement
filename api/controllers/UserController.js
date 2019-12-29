@@ -15,6 +15,7 @@ module.exports = {
         return res.view('admin/addTask',{layout:HelperService.getLayout(req.user.role),assignees,taskData:task || {}});
       }else {
         let postData = req.allParams();
+        let message = "Task created!"
         console.log('postData',postData)
         if(!postData.date
           || !postData.taskName
@@ -48,14 +49,15 @@ module.exports = {
         } else {
           createdTask = await Task.update({id:postData.taskId},data);
           createdTask = createdTask[0]
+          message ="Task updated!"
         }
         if(!createdTask) {
-          let message = HelperService.toastrMessageError('Task not created!')
+          message = HelperService.toastrMessageError('Task not created!')
           req.flash('errorMsg', message);
           res.redirect('back');
           return;
         }
-        let message =HelperService.toastrMessageSuccess('Task created!')
+        message =HelperService.toastrMessageSuccess(message);
         req.flash('message', message);
         return res.redirect('/admin/taskList');
        /* let message =HelperService.toastrMessageSuccess('Task created!')

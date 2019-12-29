@@ -151,7 +151,6 @@
       <div class="col-md-3" id="prospectCommentView">
         <div class="card h-100">
           <div class="card-body">
-            <!--<h5 class="card-title">Basic Datatable</h5>-->
             <div class="row">
               <div class="col-md-12">
                 <div class=" m-b-0 border-bottom" style="height: 50px;">
@@ -161,18 +160,15 @@
               <div class="col-md-12 m-t-20" id="commentList">
                 <% commentData.forEach(temp=>{%>
                 <div class="m-b-20 m-t-20 border-bottom" style="height: 50px;">
-                  <h6 class="page-title"><%=temp.userName%></h6>
-                  <p><%=temp.description%></p>
+                  <h6 class="page-title"><%=temp.userName || ''%></h6>
+                  <p><%=temp.description || ''%></p>
                 </div>
                 <%})%>
               </div>
-
-            <div class="col-md-12 m-t-20 m-b-20">
-
-              <button id="addNewComment" class="btn btn-primary" style="float: right"><i class="mdi mdi-plus"></i> Add New Comment</button>
-
+              <div class="col-md-12 m-t-20 m-b-20">
+              <button id="addNewComment" class="btn btn-primary" style="float: right"><i class="mdi mdi-plus"></i>Add New Comment</button>
             </div>
-            <div class="col-md-12" id="commentBox" style="display: none">
+              <div class="col-md-12" id="commentBox" style="display: none">
               <textarea class="form-control" style="border-radius: 10px" rows="6" name="comment" id="comment" ></textarea>
               <div class="invalid-feedback" id="commentError">
                 Please enter comment
@@ -184,10 +180,6 @@
           </div>
           </div>
         </div>
-    <!-- ============================================================== -->
-    <!-- End Container fluid  -->
-    <!-- ============================================================== -->
-
   </div>
 
 </div>
@@ -211,8 +203,11 @@
                 </div>`
              $('#commentList').prepend(str)
             $('#comment').val('');
+             setTimeout(function () {
+               $('#commentBox').slideUp();
+             },1000);
           }else {
-              alert('Something went wrong');
+              alert('Something went wrong'+successFullCall.message);
           }
       },(errorCallBack)=>{
         alert('Something went wrong'+errorCallBack.message);
