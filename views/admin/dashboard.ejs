@@ -1,0 +1,208 @@
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper" id="adminDashboard">
+  <!-- ============================================================== -->
+  <!-- Bread crumb and right sidebar toggle -->
+  <!-- ============================================================== -->
+  <div class="page-breadcrumb">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <h4 class="page-title">Dashboard</h4>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6  col-xs-12">
+        <div class="col-lg-3 col-md-3 col-sm-3  col-xs-12 float-right" >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+
+    <div id="dashboardContainer">
+
+
+
+      <!-- ============================================================== -->
+      <!-- Status Cards -->
+      <!-- ============================================================== -->
+
+      <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4  col-xs-12">
+            <div class="card">
+              <div class="card-body"><div id="taskStatus" width="200" height="200"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4  col-xs-12">
+            <div class="card">
+              <div class="card-body"><div id="taskPriority" width="200" height="200"></div></div>
+            </div>
+          </div>
+        <div class="col-lg-4 col-md-4 col-sm-4  col-xs-12">
+          <div class="card">
+            <div class="card-body"><div id="userType" width="200" height="200"></div></div>
+          </div>
+        </div>
+  <%console.log(taskStatus)%>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <!-- ============================================================== -->
+  <!-- End Bread crumb and right sidebar toggle -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- End Container fluid  -->
+  <!-- ============================================================== -->
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let data =<%-taskStatus%>
+    console.log('data',data)
+    Highcharts.chart('taskStatus', {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: 0,
+        plotShadow: false
+      },
+      title: {
+        text: 'Task STATUS',
+        align: 'center',
+        verticalAlign: 'middle',
+        y: 60
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      accessibility: {
+        point: {
+          valueSuffix: '%'
+        }
+      },
+      plotOptions: {
+        pie: {
+          dataLabels: {
+            enabled: true,
+            distance: -50,
+            style: {
+              fontWeight: 'bold',
+              color: 'white'
+            }
+          },
+          startAngle: -90,
+          endAngle: 90,
+          center: ['50%', '75%'],
+          size: '110%'
+        }
+      },
+      series: [{
+        type: 'pie',
+        name: 'Task Status',
+        innerSize: '50%',
+        data:data
+      }]
+    });
+
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {// Build the chart
+     let data =<%-taskPriority%>
+      Highcharts.chart('taskPriority', {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+      },
+        colors: ['#ffff00','#ff0000','#00ff00'],
+      title: {
+        text: 'Task Priority '
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      accessibility: {
+        point: {
+          valueSuffix: '%'
+        }
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: false
+          },
+          showInLegend: true
+        }
+      },
+      series: [{
+        name: 'priority',
+        colorByPoint: ['#ffff00','#ff0000','#00ff00'],
+        data: data
+      }]
+    });
+
+
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Build the chart
+        let data = <%-userType%>
+       console.log('userType',data)
+      Highcharts.chart('userType', {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+      },
+      title: {
+        text: 'USER TYPE'
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      accessibility: {
+        point: {
+          valueSuffix: '%'
+        }
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: false
+          },
+          showInLegend: true
+        }
+      },
+      series: [{
+        name: 'User Type',
+        colorByPoint: true,
+        data: data
+      }]
+    });
+  });
+</script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/variable-pie.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
