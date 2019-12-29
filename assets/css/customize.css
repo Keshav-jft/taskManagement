@@ -3038,8 +3038,8 @@
   display: none;
 }
 .InactivityRemoveHoverOption{
-  position:absolute;   
-  right:5px; 
+  position:absolute;
+  right:5px;
 }
 
 /*[LEAD PAGE CSS ]
@@ -3050,7 +3050,8 @@
   position:absolute;
   height:50px;
   background-color:#f8f9fa;
-  margin-top:-35px;
+  margin-top:-14px;
+  /*35*/
   right:16px;
   line-height:52px;
 }

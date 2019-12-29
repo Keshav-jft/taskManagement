@@ -54,7 +54,7 @@
             <form id="addUserForm" method="post" action="#">
               <div class="row">
                 <div class="col-lg-3">
-                  <input name="userId" type="hidden" value="<%=userData.id%>">
+                  <input name="userId" type="hidden" value="<%=userData.id || "" %>">
                   <div class="form-group m-t-20">
                     <label>First Name<sup>*</sup> <small class="text-muted"></small></label>
                     <input type="text" class="form-control" value="<%=userData.firstName || ''%>" name="firstName" Placeholder="Enter First Name">

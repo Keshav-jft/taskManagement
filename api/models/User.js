@@ -8,6 +8,10 @@ var uuid=require('node-uuid');
 module.exports = {
 
   attributes: {
+    userId:{
+      type:'number',
+      autoIncrement:true
+    },
     firstName:{
       type:'string'
     },
