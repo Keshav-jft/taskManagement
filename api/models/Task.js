@@ -39,6 +39,11 @@ module.exports = {
     comments:{
       type:'text'
     },
+    isDeleted:{
+      type:'boolean',
+      defaultsTo:false
+    }
+
   },
 };
 

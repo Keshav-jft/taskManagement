@@ -61,7 +61,7 @@
 
                 <%taskList.forEach((task)=>{%>
                 <%console.log(task)%>
-                <tr class="hoverable-custom  d-xs-none" onclick="window.location='/admin/viewUser/%>';" style="cursor: pointer">
+                <tr class="hoverable-custom  d-xs-none"  style="cursor: pointer">
                   <td><%=task.id%></td>
                   <td><%=moment(task.date).format('DD MMM YYYY')%></td>
                   <td><%=task.priority%></td>
@@ -72,14 +72,14 @@
                   <td><%=task.comments%>
 
                     <div class="hidden-custom">
-                      <a href="/admin/editUser/<%=task.id%>" class="text-secondary fs-18 m-l-12">
+                      <a href="/admin/addTask?taskId=<%=task.id%>" class="text-secondary fs-18 m-l-12">
                         <i class="mdi mdi-pencil" data-toggle="tooltip" data-placement="bottom" title="Edit"></i>
                       </a>
-                      <a href="/admin/viewUser/<%=task.id%>" class="text-secondary fs-18 m-l-12">
+                      <a href="/admin/viewTask?taskId=<%=task.id%>" class="text-secondary fs-18 m-l-12">
                         <i class="mdi mdi-eye" data-toggle="tooltip" data-placement="bottom" title="View"></i>
                       </a>
-                      <a href="#" class="text-secondary fs-18 m-l-12"data-toggle="modal">
-                        <i class="mdi mdi-delete" id="<%=task.id%>" data-toggle="tooltip" data-placement="bottom" title="Remove" onclick="deleteUser(this)" ></i>
+                      <a href="#" class="text-secondary fs-18 m-l-12 deleteTask"data-toggle="modal"  taskId="<%=task.id%>">
+                        <i class="mdi mdi-delete"  data-toggle="tooltip" data-placement="bottom" title="Remove"  ></i>
                       </a>
                     </div>
 
@@ -88,14 +88,14 @@
                   <!--only extra small device show--->
                   <td class="d-xl-none">
 
-                    <a href="/admin/editUser/<%=task.id%>" class="text-secondary fs-18 m-l-12">
+                    <a href="/admin/addTask?taskId=<%=task.id%>" class="text-secondary fs-18 m-l-12">
                       <i class="mdi mdi-pencil" data-toggle="tooltip" data-placement="bottom" title="Edit"></i>
                     </a>
-                    <a href="/admin/viewUser/<%=task.id%>" class="text-secondary fs-18 m-l-12">
+                    <a href="/admin/viewTask?taskId=<%=task.id%>" class="text-secondary fs-18 m-l-12">
                       <i class="mdi mdi-eye" data-toggle="tooltip" data-placement="bottom" title="View"></i>
                     </a>
-                    <a href="#" class="text-secondary fs-18 m-l-12"data-toggle="modal">
-                      <i class="mdi mdi-delete" id="<%=task.id%>" data-toggle="tooltip" data-placement="bottom" title="Remove" onclick="deleteUser(this)" ></i>
+                    <a href="#" class="text-secondary fs-18 m-l-12 deleteTask"data-toggle="modal" taskId="<%=task.id%>">
+                        <i class="mdi mdi-delete"  data-toggle="tooltip" data-placement="bottom" title="Remove"  ></i>
                     </a>
 
                   </td>
@@ -125,7 +125,7 @@
   <!--==========confirm Dialog==============-->
 
 
-  <div class="modal fade" id="ModalDeleteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="ModalDeleteTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body">
@@ -142,7 +142,7 @@
               <div class="text-center">
                 <i class="mdi mdi-alert-circle text-danger fs-60"></i>
                 <h3>Are you sure?</h3>
-                <p>Do you really want to delete these user?</p>
+                <p>Do you really want to delete these task?</p>
               </div>
             </div>
           </div>
@@ -184,35 +184,40 @@
 
   })
   let activeRow=null;
-  function modalConfirm(){
-    console.log(status)
-
-    console.log('--------',"hello")
-    let id=$(activeRow).attr('id')
-    $.post("/admin/deleteUser",
-      {id},
+  function modalConfirm(taskId){
+      $.get("/admin/deleteTask",
+      {taskId:taskId},
       function(result){
         if(result.status) {
-          $(activeRow).closest('tr').remove();
+          $(`[taskId=${taskId}]`).closest('tr').remove();
           toastr.success(result.message, 'Success');
-          $("#ModalDeleteUser").modal('hide');
+          $("#ModalDeleteTask").modal('hide');
         }else {
           toastr.error(result.message,'failed');
         }
       });
   }
-  function deleteUser(input) {
-    $("#ModalDeleteUser").modal('show');
-    activeRow =input
-  }
+
   $(document).on("click", '#modal-btn-no',function(){
-    console.log("data")
-    $("#ModalDeleteUser").modal('hide');
+    $("#ModalDeleteTask").modal('hide');
+    $('#modal-btn-yes').attr('taskId',"");
   });
+
   $(document).on("click",'#modal-btn-yes', function(){
-    $("#ModalDeleteUser").modal('hide');
-    return modalConfirm();
+    $("#ModalDeleteTask").modal('hide');
+    let taskId=$('#modal-btn-yes').attr('taskId');
+    if(!taskId){
+      alert('Something went wrong.')
+    }
+    return modalConfirm(taskId);
   });
+
+  $(document).on("click",'.deleteTask',function(){
+    let taskId = $(this).attr('taskId')
+    $("#ModalDeleteTask").modal('show');
+    $('#modal-btn-yes').attr('taskId',taskId);
+
+  })
 </script>
 
 

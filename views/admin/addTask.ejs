@@ -58,9 +58,10 @@
                   <div class="row addClientPhone">
                     <div class="col-lg-4">
                       <div class="form-group m-t-20">
+                        <input name="taskId" type="hidden" value="<%=taskData.id%>">
                         <label>Date<sup>*</sup> <small class="text-muted"></small></label>
                         <div class="input-group date form_datetime"  data-link-field="dtp_input1">
-                          <input class="form-control" size="16" name="date" type="text" Placeholder="Enter the date" readonly>
+                          <input class="form-control" size="16" name="date" value="<%=taskData.date || ''%>" type="text" Placeholder="Enter the date" readonly>
                           <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                           <div class="invalid-feedback">
                             Please select date
@@ -71,7 +72,7 @@
                     <div class="col-lg-4">
                       <div class="form-group m-t-20">
                         <label>Task<sup>*</sup> <small class="text-muted"></small></label>
-                        <input type="text" class="form-control" id="" name="taskName" Placeholder="Enter task">
+                        <input type="text" class="form-control" id="" name="taskName"  value="<%=taskData.taskName || ''%>"  Placeholder="Enter task">
                         <div class="invalid-feedback">
                           Please enter task
                         </div>
@@ -84,7 +85,7 @@
                           <option value="">Select Priority</option>
                           <%
                           HelperService.priority.forEach((priority)=>{%>
-                          <option value="<%=priority%>"><%=priority%></option>
+                          <option value="<%=priority%>" <%=priority ===taskData.priority ?'selected':''%>><%=priority%></option>
                           <% })
                           %>
                         </select>
@@ -111,7 +112,7 @@
                           <option value="">Select assignee</option>
                           <%
                           assignees.forEach((assignee)=>{%>
-                          <option value="<%=assignee.id%>"><%=assignee.firstName%></option>
+                          <option value="<%=assignee.id%>" <%=assignee.id ===(taskData.assignedTo?taskData.assignedTo.id:'') ?'selected':''%>><%=assignee.firstName%></option>
                           <% })
                           %>
                         </select>
@@ -124,7 +125,7 @@
                       <div class="form-group m-t-20">
                         <label>Deadline<sup>*</sup> <small class="text-muted"></small></label>
                         <div class="input-group date form_datetime"  data-link-field="dtp_input1">
-                          <input class="form-control" size="16" name="deadline" type="text" Placeholder="Enter the deadline" readonly>
+                          <input class="form-control" size="16" name="deadline" value="<%=taskData.deadline || ''%>" type="text" Placeholder="Enter the deadline" readonly>
                           <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                           <div class="invalid-feedback">
                             Please select deadline
@@ -139,7 +140,7 @@
                           <option value="">Select Status</option>
                           <%
                           HelperService.status.forEach((status)=>{%>
-                          <option value="<%=status%>"><%=status%></option>
+                          <option value="<%=status%>" <%=status ===taskData.status ?'selected':''%>><%=status%></option>
                           <% })
                           %>
                         </select>
@@ -163,7 +164,7 @@
                     <div class="col-lg-8">
                       <div class="form-group m-t-20">
                         <label>Additional Comment<small class="text-muted"></small></label>
-                        <textarea class="form-control" rows="6" name="comments" placeholder="Write Additional Comment "></textarea>
+                        <textarea class="form-control" rows="6" name="comments"  placeholder="Write Additional Comment "><%=taskData.comments || ''%></textarea>
 
                         <div class="invalid-feedback">
                          Enter Additional Comment

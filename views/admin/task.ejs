@@ -1,0 +1,196 @@
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+  <% flash.get('message').forEach(function (message) { %>
+
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> <%-message%>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <% }) %>
+  <% flash.get('message').forEach(function (message) { %>
+
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> <%-message%>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <% }) %>
+  <!-- ============================================================== -->
+  <!-- Bread crumb and right sidebar toggle -->
+  <!-- ============================================================== -->
+  <div class="page-breadcrumb">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <h4 class="page-title">View Task</h4>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <nav aria-label="breadcrumb" class="breadcrumb-float">
+
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Bread crumb and right sidebar toggle -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-12" id="prospectView">
+        <div class="card h-100">
+          <div class="m-t-15 m-r-15">
+            <nav aria-label="Page navigation example">
+
+            </nav>
+          </div>
+          <div class="card-body">
+            <!--<h5 class="card-title">Basic Datatable</h5>-->
+            <div class="row">
+              <div class="col-lg-4 col-xs-12 m-t-30">
+                <div class="media">
+                <span class="mediaCircleIcon mr-2">
+                  <i class="mdi mdi-account fs-18"></i>
+                </span>
+                  <div class="media-body">
+                    <h6 class="m-t-2 lh-1-5 font-w-6">
+                      <small class="text-muted font-w-6">Date</small><br>
+                      <%=task.date?task.date:'Not added'%></h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-xs-12 m-t-30">
+                <div class="media">
+              <span class="mediaCircleIcon mr-2">
+              <i class="mdi mdi-domain fs-18"></i>
+              </span>
+                  <div class="media-body">
+                    <h6 class="m-t-2 lh-1-5 font-w-6">
+                      <small class="text-muted font-w-6">Task</small><br>
+                      <%=task.taskName?task.taskName:'Not added'%></h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-xs-12 m-t-30">
+                <div class="media">
+              <span class="mediaCircleIcon mr-2">
+              <i class="mdi mdi-briefcase fs-18"></i>
+              </span>
+                  <div class="media-body">
+                    <h6 class="m-t-2 lh-1-5 font-w-6">
+                      <small class="text-muted font-w-6">Priority</small><br>
+                      <%=task.priority?task.priority:'Not added'%></h6>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+              <div class="col-lg-4 col-xs-12 m-t-30">
+                <div class="media">
+                <span class="mediaCircleIcon mr-2">
+                <i class="mdi mdi-email fs-18"></i>
+                </span>
+                  <div class="media-body">
+                    <h6 class="m-t-2 lh-1-5 font-w-6">
+                      <small class="text-muted font-w-6">Assignee</small><br>
+                      <%=task.assignedTo?`${task.assignedTo.firstName} ${task.assignedTo.lastName}`:'Not added'%></h6>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-xs-12 m-t-30">
+                <div class="media">
+											<span class="mediaCircleIcon mr-2">
+												<i class="mdi mdi-map-marker fs-18"></i>
+											</span>
+                  <div class="media-body">
+                    <h6 class="m-t-2 lh-1-5 font-w-6">
+                      <small class="text-muted font-w-6">Deadline</small><br>
+                      <%=task.deadline?task.deadline:'Not added'%></h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-xs-12 m-t-30">
+                <div class="media">
+											<span class="mediaCircleIcon mr-2">
+												<i class="mdi mdi-city fs-18"></i>
+											</span>
+                  <div class="media-body">
+                    <h6 class="m-t-2 lh-1-5 font-w-6">
+                      <small class="text-muted font-w-6">Status</small><br>
+                      <%=task.status?task.status:'Not added'%></h6>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-xs-12 m-t-30">
+                <div class="media">
+											<span class="mediaCircleIcon mr-2">
+												<i class="mdi mdi-earth fs-18"></i>
+											</span>
+                  <div class="media-body">
+                    <h6 class="m-t-2 lh-1-5 font-w-6">
+                      <small class="text-muted font-w-6">Additional Comments</small><br>
+                      <%=task.comments?task.comments:'Not added'%></h6>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+
+            <div div class="row border-top m-t-20">
+              <div class="col-lg-12 col-md-12 col-xs-12 m-t-20">
+                <button type="button" id="editProspectButton" class="btn btn-primary" onclick="openEditProspect()">Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+
+
+
+
+
+<!-- ============================================================== -->
+<!-- Popup (Modal) -->
+<!-- ============================================================== -->
+<!--collaspe-->
+
+
+
+
+
+
+
