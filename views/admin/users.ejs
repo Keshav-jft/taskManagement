@@ -61,22 +61,32 @@
               <table id="userTable" class="table table-hover" width="100%">
                 <thead>
                 <tr>
-                  <th>Email</th>
+                  <th>UserId</th>
                   <th>Name</th>
+                  <th>Email</th>
+                  <th>Mobile No.</th>
+                  <th>Whatsapp No.</th>
+                  <th>Designation</th>
+                  <th>Department</th>
                   <th>Role</th>
-                  <th>Status</th>
-                  <th class="d-xl-none">Action</th>
+                  <th>Place of Posting</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 <%userList.forEach((user)=>{%>
                 <tr class="hoverable-custom  d-xs-none">
-                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.email%></td>
+                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.id%></td>
                   <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.firstName%> <%=user.lastName%></td>
+                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.email ||'NA'%></td>
+                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.mobileNumber ||'NA'%></td>
+                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.whatsAppNumber ||'NA'%></td>
+                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.designation ||'NA'%></td>
+                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.department ||'NA'%></td>
                   <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.role.length?user.role[0].authority:''%></td>
-                  <td><%=user.isEnabled?'Active':'Inactive'%>
-
-                    <%if(!(req.user.id===user.id)){%>
+                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.postingPlace ||'NA'%></td>
+                  <td>
+                    <%if(!(req.user.id === user.id)){%>
                     <div class="hidden-custom">
                       <a href="/admin/addUser?userId=<%=user.id%>" class="text-secondary fs-18 m-l-12">
                         <i class="mdi mdi-pencil" data-toggle="tooltip" data-placement="bottom" title="Edit"></i>
@@ -84,16 +94,16 @@
                       <a href="/admin/viewUser/<%=user.id%>" class="text-secondary fs-18 m-l-12">
                         <i class="mdi mdi-eye" data-toggle="tooltip" data-placement="bottom" title="View"></i>
                       </a>
-                      <a href="#" class="text-secondary fs-18 m-l-12 deleteUser" userId="<%=user.id%>">
+                      <span style="cursor: pointer" class="text-secondary fs-18 m-l-12 deleteUser" userId="<%=user.id%>">
                         <i class="mdi mdi-delete" data-toggle="tooltip" data-placement="bottom" title="Remove" ></i>
-                      </a>
+                      </span>
                     </div>
                     <%}%>
 
                   </td>
 
                   <!--only extra small device show--->
-                  <td class="d-xl-none">
+                 <!-- <td class="d-xl-none">
                     <%if(!(req.user.id===user.id)){%>
                     <a href="/admin/editUser/<%=user.id%>" class="text-secondary fs-18 m-l-12">
                       <i class="mdi mdi-pencil" data-toggle="tooltip" data-placement="bottom" title="Edit"></i>
@@ -101,11 +111,11 @@
                     <a href="/admin/viewUser/<%=user.id%>" class="text-secondary fs-18 m-l-12">
                       <i class="mdi mdi-eye" data-toggle="tooltip" data-placement="bottom" title="View"></i>
                     </a>
-                    <a href="#" class="text-secondary fs-18 m-l-12"data-toggle="modal">
-                      <i class="mdi mdi-delete" id="<%=user.id%>" data-toggle="tooltip" data-placement="bottom" title="Remove" onclick="deleteUser(this)" ></i>
-                    </a>
+                    <span style="cursor: pointer" class="text-secondary fs-18 m-l-12 deleteUser" userId="<%=user.id%>">
+                        <i class="mdi mdi-delete" data-toggle="tooltip" data-placement="bottom" title="Remove" ></i>
+                    </span>
                     <%}%>
-                  </td>
+                  </td>-->
                 </tr>
                 <%})%>
 
@@ -186,13 +196,9 @@
   $(document).ready(function () {
     $('#userTable').DataTable({
       order:[]
-
     })
-
   })
-  let activeRow=null;
   function modalConfirm(userId){
-
     $.get("/admin/deleteUser",
       {userId:userId},
       function(result){
@@ -209,13 +215,11 @@
   $(document).on("click", '#modal-btn-no',function(){
     $("#ModalDeleteUser").modal('hide');
     $('#modal-btn-yes').attr('userId',"");
-  });
-
-  $(document).on("click",'#modal-btn-yes', function(){
+  }).on("click",'#modal-btn-yes', function(){
     $("#ModalDeleteUser").modal('hide');
     let userId=$('#modal-btn-yes').attr('userId');
     if(!userId){
-        alert('Something went wrong.')
+        alert('Something went wrong. try again');
     }
     return modalConfirm(userId);
   });
