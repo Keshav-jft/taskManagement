@@ -144,33 +144,54 @@
     </div>
     <!-- End Sidebar scroll-->
   </aside>
-  <!-- ============================================================== -->
-  <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-  <!-- ============================================================== -->
-  <!-- ============================================================== -->
-  <!-- Page wrapper  -->
-  <!-- ============================================================== -->
-  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.min.js" ></script>
+  <script src="/js/validate.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script>
+
+  <!--datatable JavaScript -->
+  <script src="/js/datatables.min.js"></script>
+  <!-- Bootstrap tether Core JavaScript -->
+  <!-- Bootstrap JavaScript -->
+  <script src="/js/popper.min.js"></script>
+  <!-- Bootstrap tether Core JavaScript -->
+  <script src="/js/bootstrap.min.js"></script>
+  <!--<script src="/js/perfect-scrollbar.jquery.min.js"></script>-->
+  <!--Wave Effects -->
+  <script src="/js/waves.js"></script>
+  <!--Menu sidebar -->
+  <script src="/js/sidebarmenu.js"></script>
+  <!--Custom JavaScript -->
+  <!--<script src="/js/custom.js"></script>-->
+  <!--Select2 -->
+  <script src="/js/select2.full.min.js"></script>
+  <!--<script src="/js/select2.min.js"></script>-->
+
+  <!--datepicker -->
+  <script src="/js/bootstrap-datetimepicker.js"></script>
+
+  <!--<script src="/js/additional-methods.min.js"></script>-->
+  <script src="/js/toastr.min.js"></script>
+  <!--<script src="/js/readmore.min.js"></script>-->
+  <!--Phone Country Code -->
+  <!--<script src="/js/intlTelInput.min.js"></script>-->
+  <!--<script src="/js/moment.js"></script>-->
+  <script>
+    var loadFromControllerAndToComponent = function (url,data, successCallBack, errorCallBack,method = 'GET') {
+      $.ajax({
+        url: url,
+        method: method,
+        data: data,
+        success: function (responseData) {
+          successCallBack && successCallBack(responseData)
+        },
+        failure: function (msg) {
+          errorCallBack && errorCallBack(msg)
+        }
+      });
+    };
+  </script>
   <%- body %>
-  <!-- ============================================================== -->
-  <!-- End Page wrapper  -->
-  <!-- ============================================================== -->
 </div>
-<!-- ============================================================== -->
-<!-- End Wrapper -->
-<!-- ============================================================== -->
-
-
-
-<!-- ============================================================== -->
-<!-- Popup (Modal) -->
-<!-- ============================================================== -->
-
-
-
-<!-- ============================================================== -->
-<!-- Popup (Modal) -->
-<!-- ============================================================== -->
 
 <div class="modal fade" id="timelineAttachImg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -207,56 +228,6 @@
     </div>
   </div>
 </div>
-
-<!--addFollowup-->
-
-<!--Next Follow Up-->
-
-
-
-
-
-
-
-
-<!-- ============================================================== -->
-<!-- All Jquery -->
-<!-- ============================================================== -->
-
-
-<script src="/js/jquery.min.js" ></script>
-
-<!--datatable JavaScript -->
-<script src="/js/datatables.min.js"></script>
-<!-- Bootstrap tether Core JavaScript -->
-<!-- Bootstrap JavaScript -->
-<script src="/js/popper.min.js"></script>
-<!-- Bootstrap tether Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/perfect-scrollbar.jquery.min.js"></script>
-<!--Wave Effects -->
-<script src="/js/waves.js"></script>
-<!--Menu sidebar -->
-<script src="/js/sidebarmenu.js"></script>
-<!--Custom JavaScript -->
-<script src="/js/custom.js"></script>
-<!--Select2 -->
-<script src="/js/select2.full.min.js"></script>
-<script src="/js/select2.min.js"></script>
-
-<!--datepicker -->
-<script src="/js/bootstrap-datetimepicker.js"></script>
-
-<script src="/js/validate.js"></script>
-<script src="/js/additional-methods.min.js"></script>
-<script src="/js/toastr.min.js"></script>
-<script src="/js/readmore.min.js"></script>
-<!--Phone Country Code -->
-<script src="/js/intlTelInput.min.js"></script>
-<script src="/js/moment.js"></script>
-
-
-
 
 
 <script>

@@ -70,22 +70,22 @@
                 </thead>
                 <tbody>
                 <%userList.forEach((user)=>{%>
-                <tr class="hoverable-custom  d-xs-none" onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer">
-                  <td><%=user.email%></td>
-                  <td><%=user.firstName%> <%=user.lastName%></td>
-                  <td><%=user.role.length?user.role[0].authority:''%></td>
+                <tr class="hoverable-custom  d-xs-none">
+                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.email%></td>
+                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.firstName%> <%=user.lastName%></td>
+                  <td onclick="window.location='/admin/viewUser/<%=user.id%>';" style="cursor: pointer"><%=user.role.length?user.role[0].authority:''%></td>
                   <td><%=user.isEnabled?'Active':'Inactive'%>
 
                     <%if(!(req.user.id===user.id)){%>
                     <div class="hidden-custom">
-                      <a href="/admin/editUser/<%=user.id%>" class="text-secondary fs-18 m-l-12">
+                      <a href="/admin/addUser?userId=<%=user.id%>" class="text-secondary fs-18 m-l-12">
                         <i class="mdi mdi-pencil" data-toggle="tooltip" data-placement="bottom" title="Edit"></i>
                       </a>
                       <a href="/admin/viewUser/<%=user.id%>" class="text-secondary fs-18 m-l-12">
                         <i class="mdi mdi-eye" data-toggle="tooltip" data-placement="bottom" title="View"></i>
                       </a>
-                      <a href="#" class="text-secondary fs-18 m-l-12"data-toggle="modal">
-                        <i class="mdi mdi-delete" id="<%=user.id%>" data-toggle="tooltip" data-placement="bottom" title="Remove" onclick="deleteUser(this)" ></i>
+                      <a href="#" class="text-secondary fs-18 m-l-12 deleteUser" userId="<%=user.id%>">
+                        <i class="mdi mdi-delete" data-toggle="tooltip" data-placement="bottom" title="Remove" ></i>
                       </a>
                     </div>
                     <%}%>
@@ -159,7 +159,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <div class="m-b-15 text-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-btn-no">No, cancel it!</button>
-                <button type="button" class="btn btn-danger" id="modal-btn-yes">Yes, delete it!</button>
+                <button type="button" class="btn btn-danger" id="modal-btn-yes" userId="">Yes, delete it!</button>
               </div>
             </div>
           </div>
@@ -191,16 +191,13 @@
 
   })
   let activeRow=null;
-  function modalConfirm(){
-    console.log(status)
+  function modalConfirm(userId){
 
-    console.log('--------',"hello")
-    let id=$(activeRow).attr('id')
-    $.post("/admin/deleteUser",
-      {id},
+    $.get("/admin/deleteUser",
+      {userId:userId},
       function(result){
         if(result.status) {
-          $(activeRow).closest('tr').remove();
+          $(`[userId=${userId}]`).closest('tr').remove();
           toastr.success(result.message, 'Success');
           $("#ModalDeleteUser").modal('hide');
         }else {
@@ -208,19 +205,29 @@
         }
       });
   }
-  function deleteUser(input) {
-    $("#ModalDeleteUser").modal('show');
-    activeRow =input
-  }
+
   $(document).on("click", '#modal-btn-no',function(){
-    console.log("data")
     $("#ModalDeleteUser").modal('hide');
+    $('#modal-btn-yes').attr('userId',"");
   });
+
   $(document).on("click",'#modal-btn-yes', function(){
     $("#ModalDeleteUser").modal('hide');
-    return modalConfirm();
+    let userId=$('#modal-btn-yes').attr('userId');
+    if(!userId){
+        alert('Something went wrong.')
+    }
+    return modalConfirm(userId);
   });
+
+  $(document).on("click",'.deleteUser',function(){
+    let userId = $(this).attr('userId')
+    $("#ModalDeleteUser").modal('show');
+    $('#modal-btn-yes').attr('userId',userId);
+
+  })
 </script>
+
 
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->

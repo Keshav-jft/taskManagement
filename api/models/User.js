@@ -8,10 +8,6 @@ var uuid=require('node-uuid');
 module.exports = {
 
   attributes: {
-    userId:{
-      type:'number',
-      autoIncrement:true
-    },
     firstName:{
       type:'string'
     },
@@ -43,6 +39,10 @@ module.exports = {
     },
     postingPlace:{
       type:'string'
+    },
+    isDeleted:{
+      type:'boolean',
+      defaultsTo:false
     }
 
   },
