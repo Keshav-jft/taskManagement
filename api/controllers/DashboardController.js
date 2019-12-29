@@ -16,6 +16,10 @@ module.exports = {
     let foundCoordinator = await Role.findOne({authority:'ROLE_COORDINATOR'}).populate('user')
     let foundAdmin = await Role.findOne({authority:'ROLE_ADMIN'}).populate('user')
     let foundSuperAdmin = await Role.findOne({authority:'ROLE_SUPER_ADMIN'}).populate('user')
+    let lowTask = await Task.count({priority:'Low'})
+    let mediumTask = await Task.count({priority:'Medium'})
+    let highTask = await Task.count({priority:'High'})
+
     let  userType =[{
       name: 'user',
       y: foundUser.user.length,
@@ -34,13 +38,13 @@ module.exports = {
       }]
     let taskPriority= [{
       name: 'LOW',
-      y: 505370,
+      y: lowTask,
     }, {
       name: 'HIGH',
-      y: 551500,
+      y: highTask,
     }, {
       name: 'MEDIUM',
-      y: 312685,
+      y: mediumTask,
     }]
     return res.view('admin/dashboard', {
       layout: HelperService.getLayout(req.user.role),
