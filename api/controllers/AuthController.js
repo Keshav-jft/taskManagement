@@ -11,7 +11,7 @@ module.exports = {
     passport.authenticate('webLogin', function (err, user, info) {
       console.log(err, user, info)
       if ((err) || (!user)) {
-        req.flash('errMessage', info.message);
+        req.flash('errorMsg', 'Email or Password incorrect!');
         return res.redirect('/')
       }
       else {
@@ -22,7 +22,7 @@ module.exports = {
             if(req.user.role.includes('ROLE_SUPER_ADMIN') ) {
               return res.redirect('/adminDashboard');
             }
-            req.flash('errMessage', "You have not assigned Admin login role");
+            req.flash('errorMsg', 'Email or Password incorrect!');
             res.redirect('/');
           }
         })

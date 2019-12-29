@@ -110,13 +110,16 @@
                   <div class="form-group m-t-20">
                     <label>Designation<sup>*</sup></label>
                     <select class="select2 form-control custom-select" name="designation" style="width: 100%; height:36px;">
-                      <option>Select Designation</option>
+                      <option value="">Select Designation</option>
                       <%
                       HelperService.designationList.forEach((designation)=>{%>
                       <option value="<%=designation%>" <%=designation ===userData.designation ?'selected':''%>><%=designation%></option>
                       <% })
                       %>
                     </select>
+                    <div class="invalid-feedback">
+                      Please select designation
+                    </div>
                   </div>
                 </div>
 
@@ -124,13 +127,16 @@
                   <div class="form-group m-t-20">
                     <label>Department<sup>*</sup></label>
                     <select class="select2 form-control custom-select" name="department" style="width: 100%; height:36px;">
-                      <option>Select Department</option>
+                      <option value="">Select Department</option>
                       <%
                       HelperService.departmentList.forEach((department)=>{%>
                       <option value="<%=department%>" <%=department===userData.department?"selected":""%>><%=department%></option>
                       <% })
                       %>
                     </select>
+                    <div class="invalid-feedback">
+                      Please select department
+                    </div>
                   </div>
                 </div>
 
@@ -138,13 +144,16 @@
                   <div class="form-group m-t-20">
                     <label>Role<sup>*</sup></label>
                     <select class="select2 form-control custom-select" name="role" style="width: 100%; height:36px;">
-                      <option>Select Role</option>
+                      <option value="">Select Role</option>
                       <%
                       roles.forEach((role)=>{%>
                       <option value="<%=role.id%>" <%= role.id===userData.roleId? "selected":''%> role="<%=JSON.stringify(userData)%>"><%=role.authority%></option>
                       <% })
                       %>
                     </select>
+                    <div class="invalid-feedback">
+                      Please select role
+                    </div>
                   </div>
                 </div>
 
@@ -156,13 +165,16 @@
                   <div class="form-group m-t-20">
                     <label>Place of posting<sup>*</sup></label>
                     <select class="select2 form-control custom-select" name="postingPlace" style="width: 100%; height:36px;">
-                      <option>Select Posting Place</option>
+                      <option value="">Select Posting Place</option>
                       <%
                       HelperService.placeList.forEach((place)=>{%>
                       <option value="<%=place%>" <%=place ===userData.postingPlace ? "selected":'' %>><%=place%></option>
                       <% })
                       %>
                     </select>
+                    <div class="invalid-feedback">
+                      Please select posting place
+                    </div>
                   </div>
                 </div>
               </div>
@@ -196,7 +208,7 @@
       errorClass:'is-invalid',
       rules: {
         firstName:{
-          required:true
+          required:true,
         },
         lastName:{
           required:true
@@ -210,6 +222,26 @@
         },
         password : {
           required:true
+        },
+        mobileNumber:{
+          required:true,
+          number:true
+
+        },
+        whatsAppNumber:{
+          required:true,
+          number:true
+
+        },
+        designation:{
+          required:true,
+        },
+        department:{
+          required:true,
+        },
+        postingPlace:{
+          required:true,
+
         }
       },
       messages: {
@@ -229,6 +261,24 @@
         },
         password: {
           required: ''
+        },
+        mobileNumber:{
+          required:'',
+          number:''
+
+        },
+        whatsAppNumber:{
+          required:'',
+          number:''
+        },
+        designation:{
+          required:'',
+        },
+        department:{
+          required:'',
+        },
+        postingPlace:{
+          required:'',
         }
       },
         submitHandler: function (form) {
